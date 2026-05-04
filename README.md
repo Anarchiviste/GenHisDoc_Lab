@@ -14,7 +14,7 @@ GenHisDoc
 ## Published Datasets inside GenHisDoc
 
 ### The Sacrobosco Dataset (S-VED)
- Paper : (CorDeep and the Sacrobosco Dataset: Detection of Visual Elements in Historical Documents)[https://doi.org/10.3390/jimaging8100285]
+Paper : [CorDeep and the Sacrobosco Dataset: Detection of Visual Elements in Historical Documents](https://doi.org/10.3390/jimaging8100285)
 
 Published by Jochen Büttner 1, Julius Martinetz 1,2, Hassan El-Hajj 1,2, Matteo Valleriani 1,2,3,4.
 
@@ -26,10 +26,18 @@ Published by Jochen Büttner 1, Julius Martinetz 1,2, Hassan El-Hajj 1,2, Matteo
 
 4 : The Cohn Institute for the History and Philosophy of Science and Ideas, Faculty of Humanities, Tel Aviv University, P.O. Box 39040, Ramat Aviv, Tel Aviv 6139001, Israel
 
-Datasets : (The Sacrobosco Dataset)[https://zenodo.org/record/7142456]
+Datasets : [The Sacrobosco Dataset](https://zenodo.org/record/7142456)
 
 Modifications : The printer's mark annotation classe has been transfered to the illustration annotation classe. The format of the annotation in csv as been transformed into yolo style format with a txt attached to the image.
 
+### IlluHisDoc
 
+Paper : [docExtractor: An off-the-shelf historical document element extraction](https://arxiv.org/abs/2012.08191)
 
+Published by Tom Monnier 1 et Mathieu Aubry 1
 
+1 : LIGM, École nationale des Ponts et chaussées, Université Gustave Eiffel, CNRS, Marne-la-vallée, France
+
+Datasets: [Illuhisdoc dropbox link](https://www.dropbox.com/scl/fi/ql0yxqapyyl0adbzzgn1x/illuhisdoc.zip?rlkey=q7mqkd3ljzwrk3lelkm2rgico&e=1&dl=0)
+
+Modifications : Illuhisdoc use a per pixel segmentation with 4 classes, we transformed this segmentations in yolo style format detection.
