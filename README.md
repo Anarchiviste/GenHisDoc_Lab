@@ -1,6 +1,6 @@
 # GenHisDoc 
 
-GenHisDoc is a generalistic datasets for historical documents segmentation. GenHisDoc use a combination of several previously published datasets which have been adapted and re-annotated to work together and our own annotated data.
+GenHisDoc is a generalistic datasets for historical documents layout recognition and detection. GenHisDoc use a combination of several previously published datasets which have been adapted and re-annotated to work together and our own annotated data.
 
 ```markdown
 GenHisDoc
