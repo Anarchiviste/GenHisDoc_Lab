@@ -2,6 +2,7 @@
 env/
 venv/
 .venv/
+bin/
 
 # Variables d'environnement — NE JAMAIS commiter ce fichier !
 .env
@@ -14,3 +15,6 @@ __pycache__/
 # IDE
 .vscode/
 .idea/
+lib/
+lib64/
+
