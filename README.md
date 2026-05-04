@@ -5,8 +5,8 @@ GenHisDoc is a generalistic datasets for historical documents layout recognition
 ```markdown
 GenHisDoc
 ├── code 
-├── S-VED datasets
-├── illuhisdoc datasets
+├── S-VED
+├── illuhisdoc
 ├── Horae LS_V2
 └── Custom (Lujes) 
 ```
