@@ -11,13 +11,13 @@ import argparse
 import matplotlib.gridspec as gridspec
 from scipy.stats import gaussian_kde
 
-DATASET_DIR = Path("illuhisdoc/msi/")
+DATASET_DIR = Path("illuhisdoc/mss/")
 
 
 def recreation_yolo_txt(Dataset_dir: str):
     label = 0
     for entry in glob.iglob(f'{Dataset_dir}/*.png'):
-        name_1 = entry.replace('illuhisdoc/msi/', '')
+        name_1 = entry.replace('illuhisdoc/mss/', '')
         name_2 = name_1.replace('_seg.png', '')
         labeled_image = cv2.imread(entry)
         b, g, r = cv2.split(labeled_image)
