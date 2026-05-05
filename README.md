@@ -41,3 +41,15 @@ Published by Tom Monnier 1 et Mathieu Aubry 1
 Datasets: [Illuhisdoc dropbox link](https://www.dropbox.com/scl/fi/ql0yxqapyyl0adbzzgn1x/illuhisdoc.zip?rlkey=q7mqkd3ljzwrk3lelkm2rgico&e=1&dl=0)
 
 Modifications : Illuhisdoc use a per pixel segmentation with 4 classes, we transformed this segmentations in yolo style format detection.
+
+### Horae LSv2
+
+Datasets : [HORAE-LSv2. Layout Segmentation Dataset for Medieval Books of Hours (Version 2)](https://zenodo.org/records/16919911)
+
+Published by Stutzmann Dominique 1, Bernard Leterme Lise 1, Boillet Mélodie 2, Bonhomme Marie-Laurence, Kermorvant Christopher 3
+
+1 : IRHT
+
+2 & 3 : Teklia
+
+Modificatons : Horae use a deep annotation system usefull only for manuscript, we reunited this classes into our segmentation ontology.
