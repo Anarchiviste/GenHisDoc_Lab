@@ -52,4 +52,4 @@ Published by Stutzmann Dominique 1, Bernard Leterme Lise 1, Boillet Mélodie 2, 
 
 2 & 3 : Teklia
 
-Modificatons : Horae use a deep annotation system usefull only for manuscript, we reunited this classes into our segmentation ontology.
+Modificatons : Horae use a deep annotation system usefull only for manuscript, we reunited this classes into our segmentation ontology. We kept 4244 annotations about ornments, illustration and initials, and suppresed 18720 annotations about text segmentation.
