@@ -48,8 +48,8 @@ Datasets : [HORAE-LSv2. Layout Segmentation Dataset for Medieval Books of Hours 
 
 Published by Stutzmann Dominique 1, Bernard Leterme Lise 1, Boillet Mélodie 2, Bonhomme Marie-Laurence, Kermorvant Christopher 3
 
-1 : IRHT
+1 :  Institut de recherche et d'histoire des textes du Centre national de la recherche scientifique, Paris - Aubervilliers, 14, cours des Humanités, 93322 Aubervilliers
 
-2 & 3 : Teklia
+2 & 3 : Teklia, 30 rue Raymond Losserand, 75014 Paris, France
 
 Modificatons : Horae use a deep annotation system usefull only for manuscript, we reunited this classes into our segmentation ontology. We kept 4244 annotations about ornements, illustrations and initials, and suppresed 18720 annotations about text segmentation.
