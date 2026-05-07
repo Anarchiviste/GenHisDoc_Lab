@@ -421,7 +421,7 @@ def generating_illuhisdoc_html(directory: Path) -> None:
                     </ul>
                     <p>Datasets : <a href="https://www.dropbox.com/scl/fi/ql0yxqapyyl0adbzzgn1x/illuhisdoc.zip?rlkey=q7mqkd3ljzwrk3lelkm2rgico&e=1&dl=0">Dropbox link for illuhisdoc</a></p>
                     <p>Modifications : Illuhisdoc use a per pixel segmentation with 4 classes, we transformed this segmentation in yolo style format detection.</p>
-                    <img src="illustrations/illuhisdoc_class_distribution.png">
+                    <img src="illustrations/illushisdoc_class_distribution.png">
                     <ul>
                         <li>Illustrations : 257</li>
                         <li>Initials: 54</li>
