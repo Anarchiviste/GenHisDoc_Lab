@@ -17,7 +17,7 @@ column = df.iloc[:, 1]
 counts = column.value_counts()
 print(counts)
 
-def recreation_yolo_txt(df: pd.DataFrame):
+def recreation_yolo_txt(df: pd.DataFrame) -> None:
     index_des_images = []
     index_des_jpg = 0
 

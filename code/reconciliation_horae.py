@@ -16,7 +16,7 @@ import os
 
 DATASET_DIR = Path("/home/lunes/Documents/GenHisDoc/HoraeV2/")
 
-def reconciliation_Horae(directory: Path):
+def reconciliation_Horae(directory: Path) -> None:
     
     label_mapping = {
         0: 0, # miniature => Illustration

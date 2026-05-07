@@ -14,7 +14,7 @@ from scipy.stats import gaussian_kde
 DATASET_DIR = Path("illuhisdoc/p/")
 
 
-def recreation_yolo_txt(Dataset_dir: str):
+def recreation_yolo_txt(Dataset_dir: str) -> None:
     label = 0
     for entry in glob.iglob(f'{Dataset_dir}/*.png'):
         name_1 = entry.replace('illuhisdoc/p/', '')
