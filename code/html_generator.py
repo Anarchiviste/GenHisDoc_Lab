@@ -293,7 +293,7 @@ def generating_sved_html(directory: Path) -> None:
                 label_map,
                 )
         
-        if image is not output_path.is_file():
+        if not output_path.is_file():
             image.save((output_path))
             annotations_crées += 1
         else:
@@ -372,6 +372,16 @@ def generating_illuhisdoc_html(directory: Path) -> None:
     
     images_dir_msd = Path("illuhisdoc/msd/images")
     labels_dir_msd = Path("illuhisdoc/msd/labels")
+    
+    images_dir_msi = Path("illuhisdoc/msi/images")
+    labels_dir_msi = Path("illuhisdoc/msi/labels")
+    
+    images_dir_mss = Path("illuhisdoc/mss/images")
+    labels_dir_mss = Path("illuhisdoc/mss/labels")
+
+    images_dir_p = Path("illuhisdoc/p/images")
+    labels_dir_p = Path("illuhisdoc/p/labels")
+
     identifier_list = []
     annotations_crées = 0
     annotations_ignorées = 0
@@ -390,7 +400,73 @@ def generating_illuhisdoc_html(directory: Path) -> None:
                 label_map,
                 )
         
-        if image is not output_path.is_file():
+        if not output_path.is_file():
+            image.save((output_path))
+            annotations_crées += 1
+        else:
+            annotations_ignorées += 1
+        
+        identifier_list.append(f'{identifier}')
+
+    print("génération des annotations pour illuhisdoc initial")
+
+    for filename in tqdm(random.sample(os.listdir(labels_dir_msi), 25)):
+        if not filename.endswith(".txt"):
+            continue
+        identifier = filename.replace(".txt", "")
+        output_path = Path(f'generated_html/illushisdoc_bb_dir/{identifier}.jpg')
+        
+        image = draw_yolo_annotations(
+                images_dir_msi / f'{identifier}.jpg',
+                labels_dir_msi / f'{identifier}.txt',
+                label_map,
+                )
+        
+        if not output_path.is_file():
+            image.save((output_path))
+            annotations_crées += 1
+        else:
+            annotations_ignorées += 1
+        
+        identifier_list.append(f'{identifier}')
+ 
+    print("génération des annotations pour illuhisdoc science")
+
+    for filename in tqdm(random.sample(os.listdir(labels_dir_mss), 25)):
+        if not filename.endswith(".txt"):
+            continue
+        identifier = filename.replace(".txt", "")
+        output_path = Path(f'generated_html/illushisdoc_bb_dir/{identifier}.jpg')
+        
+        image = draw_yolo_annotations(
+                images_dir_mss / f'{identifier}.jpg',
+                labels_dir_mss / f'{identifier}.txt',
+                label_map,
+                )
+        
+        if not output_path.is_file():
+            image.save((output_path))
+            annotations_crées += 1
+        else:
+            annotations_ignorées += 1
+        
+        identifier_list.append(f'{identifier}')
+        
+    print("génération des annotations pour illuhisdoc printed")
+
+    for filename in tqdm(random.sample(os.listdir(labels_dir_p), 25)):
+        if not filename.endswith(".txt"):
+            continue
+        identifier = filename.replace(".txt", "")
+        output_path = Path(f'generated_html/illushisdoc_bb_dir/{identifier}.jpg')
+        
+        image = draw_yolo_annotations(
+                images_dir_p / f'{identifier}.jpg',
+                labels_dir_p / f'{identifier}.txt',
+                label_map,
+                )
+        
+        if not output_path.is_file():
             image.save((output_path))
             annotations_crées += 1
         else:
@@ -459,11 +535,106 @@ def generating_illuhisdoc_html(directory: Path) -> None:
                 ''')
 
         print(f"images annotées crées : {annotations_crées}")
-        print(f"annotations ignorées : {annotations_ignorées}")     
+        print(f"annotations ignorées : {annotations_ignorées}")   
+        
+def generating_horae_html(directory: Path) -> None:
+      
+    images_dir_horae = Path("HoraeV2/images")
+    labels_dir_horae = Path("HoraeV2/label_output")
+    
+    identifier_list = []
+    annotations_crées = 0
+    annotations_ignorées = 0
+    
+    print("génération des annotations pour Horae LSv2")
+    
+    for filename in tqdm(random.sample(os.listdir(labels_dir_horae), 100)):
+        if not filename.endswith(".txt"):
+            continue
+        identifier = filename.replace(".txt", "")
+        output_path = Path(f'generated_html/horae_bb_dir/{identifier}.jpg')
+        
+        image = draw_yolo_annotations(
+                images_dir_horae / f'{identifier}.jpg',
+                labels_dir_horae / f'{identifier}.txt',
+                label_map,
+                )
+        
+        if not output_path.is_file():
+            image.save((output_path))
+            annotations_crées += 1
+        else:
+            annotations_ignorées += 1
+        
+        identifier_list.append(f'{identifier}')
+    selection = random.sample(identifier_list, 25)
+        
+    with open(f'{output_dir}/horae.html', 'w') as f:
+        f.write(f'''<!DOCTYPE html>
+            <html>
+                <head>
+                    <meta charset="UTF-8">
+                    <link type="text/css" rel="stylesheet" href="style.css">
+                    <script src="visualisation.js" defer></script>
+                </head>
+                <body>
+                <header>
+                    <h1><a href="index.html">GenHisDoc</a></h1>
+                    <h2>Horae LSv2</h2>
+                    <p><a href="illu_image.html">visualisation des images</a></p>
+                </header>
+                <main>
+                    <p>Published by Stutzmann Dominique 1, Bernard Leterme Lise 1, Boillet Mélodie 2, Bonhomme Marie-Laurence, Kermorvant Christopher 2.</p>
+                    <ul>
+                        <li>1 : Institut de recherche et d'histoire des textes du Centre national de la recherche scientifique, Paris - Aubervilliers, 14, cours des Humanités, 93322 Aubervilliers</li>
+                        <li>2 : Teklia, 30 rue Raymond Losserand, 75014 Paris, France</li>
+                    </ul>
+                    <p>Datasets : <a href="https://zenodo.org/records/16919911">Horae LsV2</a></p>
+                    <p>Modifications : Horae use a deep annotation system usefull only for manuscript, we reunited this classes into our segmentation ontology. We kept 4244 annotations about ornements, illustrations and initials, and suppressed 18720 annotations about text segmentation.</p>
+                    <img src="illustrations/horae_class_distribution.png">
+                    <ul>
+                        <li>Initials: 2942</li>
+                        <li>Decoration: 1143</li>
+                        <li>Illustrations : 159</li>
+                    </ul>
+                </main>
+                </body>
+                <footer>
+                    <a href="https://github.com/Anarchiviste">Jules Musquin</a>
+                </footer>    
+            </html>
+            ''')
+        
+    with open(f'{output_dir}/horae_image.html', 'w') as f:
+        f.write('''<!DOCTYPE html>
+                <html>
+                    <head>
+                        <meta charset="UTF-8">
+                        <link type="text/css" rel="stylesheet" href="style.css">
+                        <script src="visualisation.js" defer></script>
+                    </head>
+                    <header>
+                        <h1><a href="index.html">GenHisDoc</a></h1>
+                    </header>
+                    <body>
+                ''')
+        for i in selection:
+            f.write(f'<p>image : {i}.jpg</p>\n')
+            f.write(f'<img src="horae_bb_dir/{i}.jpg">\n')
 
+        f.write('''</body>
+                    <footer>
+                        <a href="https://github.com/Anarchiviste">Jules Musquin</a>
+                    </footer>
+                </html>
+                ''')
+
+        print(f"images annotées crées : {annotations_crées}")
+        print(f"annotations ignorées : {annotations_ignorées}")
  
 generating_index_html(output_dir)
 generating_style_css(output_dir)
 generating_sved_html(output_dir)
 generating_illuhisdoc_html(output_dir)
+generating_horae_html(output_dir)
     
