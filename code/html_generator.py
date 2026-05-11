@@ -74,14 +74,15 @@ def illuhisdoc_visualisation(input_dir: Path, labels_dict:dict) -> None:
 
             total_labels.append(label)
 
-    counts = Counter(total_labels)
-    print(counts)
-
-    labels = [labels_dict[k] for k in counts.keys()]
-    values = list(counts.values())
+    global counts_illu
+    counts_illu = Counter(total_labels)
+    print(counts_illu)
+    
+    labels_illu = [labels_dict[k] for k in counts_illu.keys()]
+    values_illu = list(counts_illu.values())
 
     plt.figure(figsize=(6, 6))
-    plt.pie(values, labels=labels, autopct="%1.1f%%")
+    plt.pie(values_illu, labels=labels_illu, autopct="%1.1f%%")
     plt.title("illuhisdoc Class distribution")
     plt.savefig("generated_html/illustrations/illushisdoc_class_distribution.png")
 
@@ -109,14 +110,15 @@ def horae_visualisation(input_dir:Path, labels_dict:dict) -> None:
 
             total_labels.append(label)
 
-    counts = Counter(total_labels)
-    print(counts)
+    global counts_horae
+    counts_horae = Counter(total_labels)
+    print(counts_horae)
 
-    labels = [labels_dict[k] for k in counts.keys()]
-    values = list(counts.values())
+    labels_horae = [labels_dict[k] for k in counts_horae.keys()]
+    values_horae = list(counts_horae.values())
 
     plt.figure(figsize=(6, 6))
-    plt.pie(values, labels=labels, autopct="%1.1f%%")
+    plt.pie(values_horae, labels=labels_horae, autopct="%1.1f%%")
     plt.title("Horae Class distribution")
     plt.savefig("generated_html/illustrations/horae_class_distribution.png")
 
@@ -144,14 +146,15 @@ def sved_visualisation(input_dir:Path, labels_dict:dict) -> None:
 
             total_labels.append(label)
 
-    counts = Counter(total_labels)
-    print(counts)
+    global counts_sved
+    counts_sved = Counter(total_labels)
+    print(counts_sved)
 
-    labels = [labels_dict[k] for k in counts.keys()]
-    values = list(counts.values())
+    labels_sved = [labels_dict[k] for k in counts_sved.keys()]
+    values_sved = list(counts_sved.values())
 
     plt.figure(figsize=(6, 6))
-    plt.pie(values, labels=labels, autopct="%1.1f%%")
+    plt.pie(values_sved, labels=labels_sved, autopct="%1.1f%%")
     plt.title("sved Class distribution")
     plt.savefig("generated_html/illustrations/sved_class_distribution.png")
 
@@ -210,6 +213,7 @@ def generating_style_css(directory: Path) -> None:
                 bottom: 0;    
                 width: 100%;
                 text-align: center;
+                background-color: white;
             }
             
             img {
@@ -219,6 +223,16 @@ def generating_style_css(directory: Path) -> None:
             ''')
 
 def generating_index_html(directory: Path) -> None:
+    counts_total = counts_horae + counts_illu + counts_sved
+
+    labels_total = [label_map[k] for k in counts_total.keys()]
+    values_total = list(counts_total.values())
+
+    plt.figure(figsize=(6, 6))
+    plt.pie(values_total, labels=labels_total, autopct="%1.1f%%")
+    plt.title("Total class distribution")
+    plt.savefig("generated_html/illustrations/total_class_distribution.png")
+
     with open(f'{directory}/index.html', 'w') as f:
         f.write('''<!DOCTYPE html>
             <html>
@@ -228,7 +242,7 @@ def generating_index_html(directory: Path) -> None:
                 </head>
                 <body>
                     <header>
-                        <h1><a href="index.html">GenHisDoc</a></h1>
+                        <h1 id="top"><a href="index.html">GenHisDoc</a></h1>
                         <h2>generalistic historical datasets</h2>
                     </header>
                     <main>
@@ -237,9 +251,10 @@ def generating_index_html(directory: Path) -> None:
                         <article><a href="horae.html">Horae LSv2</a></article>
                         <article><a href="sved.html">S-VED</a></article>
                     </main>
+                    <img src="illustrations/total_class_distribution.png">
                 </body>
                 <footer>
-                    <a href="https://github.com/Anarchiviste">Jules Musquin</a>
+                    <a href="#top">Back to top</a>
                 </footer>
            </html>
            ''')
@@ -301,7 +316,10 @@ def generating_sved_html(directory: Path) -> None:
         
         identifier_list.append(f'{identifier}')
     
-    selection = random.sample(identifier_list, 50)    
+    selection = random.sample(identifier_list, 50)
+
+    total_value = sum(counts_sved.values())
+
     with open(f'{output_dir}/sved.html', 'w') as f:
         f.write(f'''<!DOCTYPE html>
             <html>
@@ -312,7 +330,7 @@ def generating_sved_html(directory: Path) -> None:
                 </head>
                 <body>
                 <header>
-                    <h1><a href="index.html">GenHisDoc</a></h1>
+                    <h1 id="top"><a href="index.html">GenHisDoc</a></h1>
                     <h2>S-VED (The sacrobosco datasets)</h2>
                     <p><a href="sved_image.html">visualisation des images</a></p>
                 </header>
@@ -329,14 +347,16 @@ def generating_sved_html(directory: Path) -> None:
                     <p>Modifications : The printer's mark annotation classe has been transfered to the illustration annotation classe. The format of the annotation in csv as been transformed into yolo style format with a txt attached to the image.</p>
                     <img src="illustrations/sved_class_distribution.png">
                     <ul>
-                        <li>Illustrations : 2095</li>
-                        <li>Initials: 614</li>
-                        <li>Decoration: 218</li>
+                        <li>Total : {total_value}</li>
+                        <hr>
+                        <li>Illustrations : {counts_sved[0]}</li>
+                        <li>Initials: {counts_sved[2]}</li>
+                        <li>Decoration: {counts_sved[1]}</li>
                     </ul>
                 </main>
                 </body>
                 <footer>
-                    <a href="https://github.com/Anarchiviste">Jules Musquin</a>
+                    <a href="#top">Back to top</a>
                 </footer>    
             </html>
             ''')
@@ -350,7 +370,7 @@ def generating_sved_html(directory: Path) -> None:
                         <script src="visualisation.js" defer></script>
                     </head>
                     <header>
-                        <h1><a href="index.html">GenHisDoc</a></h1>
+                        <h1 id="top"><a href="index.html">GenHisDoc</a></h1>
                     </header>
                     <body>
                 ''')
@@ -360,7 +380,7 @@ def generating_sved_html(directory: Path) -> None:
 
         f.write('''</body>
                     <footer>
-                        <a href="https://github.com/Anarchiviste">Jules Musquin</a>
+                        <a href="#top">Back to top</a>
                     </footer>
                 </html>
                 ''')
@@ -474,6 +494,7 @@ def generating_illuhisdoc_html(directory: Path) -> None:
         
         identifier_list.append(f'{identifier}')
     
+    total_value = sum(counts_illu.values())
     selection = random.sample(identifier_list, 25)    
     with open(f'{output_dir}/illuhisdoc.html', 'w') as f:
         f.write(f'''<!DOCTYPE html>
@@ -485,7 +506,7 @@ def generating_illuhisdoc_html(directory: Path) -> None:
                 </head>
                 <body>
                 <header>
-                    <h1><a href="index.html">GenHisDoc</a></h1>
+                    <h1 id="top"><a href="index.html">GenHisDoc</a></h1>
                     <h2>illuhisdoc</h2>
                     <p><a href="illu_image.html">visualisation des images</a></p>
                 </header>
@@ -499,13 +520,15 @@ def generating_illuhisdoc_html(directory: Path) -> None:
                     <p>Modifications : Illuhisdoc use a per pixel segmentation with 4 classes, we transformed this segmentation in yolo style format detection.</p>
                     <img src="illustrations/illushisdoc_class_distribution.png">
                     <ul>
-                        <li>Illustrations : 257</li>
-                        <li>Initials: 54</li>
+                        <li>Total : {total_value}</li>
+                        <hr>
+                        <li>Illustrations : {counts_illu[0]}</li>
+                        <li>Initials: {counts_illu[2]}</li>
                     </ul>
                 </main>
                 </body>
                 <footer>
-                    <a href="https://github.com/Anarchiviste">Jules Musquin</a>
+                    <a href="#top">Back to top</a>
                 </footer>    
             </html>
             ''')
@@ -519,7 +542,7 @@ def generating_illuhisdoc_html(directory: Path) -> None:
                         <script src="visualisation.js" defer></script>
                     </head>
                     <header>
-                        <h1><a href="index.html">GenHisDoc</a></h1>
+                        <h1 id="top"><a href="index.html">GenHisDoc</a></h1>
                     </header>
                     <body>
                 ''')
@@ -529,7 +552,7 @@ def generating_illuhisdoc_html(directory: Path) -> None:
 
         f.write('''</body>
                     <footer>
-                        <a href="https://github.com/Anarchiviste">Jules Musquin</a>
+                        <a href="#top">Back to top</a>
                     </footer>
                 </html>
                 ''')
@@ -567,6 +590,8 @@ def generating_horae_html(directory: Path) -> None:
             annotations_ignorées += 1
         
         identifier_list.append(f'{identifier}')
+    
+    total_value = sum(counts_horae.values())
     selection = random.sample(identifier_list, 25)
         
     with open(f'{output_dir}/horae.html', 'w') as f:
@@ -579,7 +604,7 @@ def generating_horae_html(directory: Path) -> None:
                 </head>
                 <body>
                 <header>
-                    <h1><a href="index.html">GenHisDoc</a></h1>
+                    <h1 id="top"><a href="index.html">GenHisDoc</a></h1>
                     <h2>Horae LSv2</h2>
                     <p><a href="illu_image.html">visualisation des images</a></p>
                 </header>
@@ -593,14 +618,16 @@ def generating_horae_html(directory: Path) -> None:
                     <p>Modifications : Horae use a deep annotation system usefull only for manuscript, we reunited this classes into our segmentation ontology. We kept 4244 annotations about ornements, illustrations and initials, and suppressed 18720 annotations about text segmentation.</p>
                     <img src="illustrations/horae_class_distribution.png">
                     <ul>
-                        <li>Initials: 2942</li>
-                        <li>Decoration: 1143</li>
-                        <li>Illustrations : 159</li>
+                        <li>Total : {total_value}</li>
+                        <hr>
+                        <li>Initials: {counts_horae[2]}</li>
+                        <li>Decoration: {counts_horae[1]}</li>
+                        <li>Illustrations : {counts_horae[0]}</li>
                     </ul>
                 </main>
                 </body>
                 <footer>
-                    <a href="https://github.com/Anarchiviste">Jules Musquin</a>
+                    <a href="#top">Back to top</a>
                 </footer>    
             </html>
             ''')
@@ -614,7 +641,7 @@ def generating_horae_html(directory: Path) -> None:
                         <script src="visualisation.js" defer></script>
                     </head>
                     <header>
-                        <h1><a href="index.html">GenHisDoc</a></h1>
+                        <h1 id="top"><a href="index.html">GenHisDoc</a></h1>
                     </header>
                     <body>
                 ''')
@@ -624,7 +651,7 @@ def generating_horae_html(directory: Path) -> None:
 
         f.write('''</body>
                     <footer>
-                        <a href="https://github.com/Anarchiviste">Jules Musquin</a>
+                        <a href="#top">Back to top</a>
                     </footer>
                 </html>
                 ''')
