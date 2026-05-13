@@ -53,3 +53,16 @@ Published by Stutzmann Dominique 1, Bernard Leterme Lise 1, Boillet Mélodie 2, 
 2 & 3 : Teklia, 30 rue Raymond Losserand, 75014 Paris, France
 
 Modificatons : Horae use a deep annotation system usefull only for manuscript, we reunited this classes into our segmentation ontology. We kept 4244 annotations about ornements, illustrations and initials, and suppressed 18720 annotations about text segmentation.
+
+## Project schedule and organisation
+
+```mermaid
+gantt
+    schedule & organisation
+    dateformat yyyy-mm-dd
+    excludes 2026-04-01,2026-07-01
+
+    section Bibliography
+        Bibliography review for historical documents segmentation   :a1, 2026-04-01, 28d
+        Review of ontologies and choice of our classes  : after a1, 7d
+```
