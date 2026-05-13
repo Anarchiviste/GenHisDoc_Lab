@@ -1,0 +1,5 @@
+'0': 'Illustration'
+'1': 'Decoration'
+'2': 'Initial'
+'3': 'Stamp'
+'4': 'Table'
