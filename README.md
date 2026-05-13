@@ -63,6 +63,6 @@ gantt
     excludes 2026-04-01,2026-07-01
 
     section Bibliography
-        Bibliography review for historical documents segmentation   :a1, 2026-04-01, 28d
-        Review of ontologies and choice of our classes  : after a1, 7d
+        Bibliography review   :a1, 2026-04-01, 28d
+        Ontology creation  : after a1, 7d
 ```
