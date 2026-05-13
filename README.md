@@ -63,6 +63,10 @@ gantt
     excludes 2026-04-01,2026-07-01
 
     section Bibliography
-        Bibliography review   :a1, 2026-04-01, 28d
-        Ontology creation  : after a1, 7d
+        Datasets review   :a1, 2026-04-01, 28d
+        Ontology review & creation    :after a1, 7d
+    section Datasets Creation
+        harmonization of formats :a2 2026-04-28, 9d
+        harmonization of annotations :after a2, 7d
+        enrichment of annotations : after a2, 7d
 ```
