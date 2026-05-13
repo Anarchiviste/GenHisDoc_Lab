@@ -65,8 +65,9 @@ gantt
     section Bibliography
         Datasets review   :a1, 2026-04-01, 28d
         Ontology review & creation    :after a1, 7d
+
     section Datasets Creation
         harmonization of formats :b1 2026-04-28, 9d
         harmonization of annotations :b2, after b1, 7d
-        enrichment of annotations : after b2, 7d
+        enrichment of annotations :after b2, 7d
 ```
