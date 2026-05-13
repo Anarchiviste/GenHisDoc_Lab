@@ -58,7 +58,7 @@ Modificatons : Horae use a deep annotation system usefull only for manuscript, w
 
 ```mermaid
 gantt
-    schedule
+    title GenHisDoc Schedule & organisation
     dateformat yyyy-mm-dd
     excludes 2026-04-01,2026-07-01
 
