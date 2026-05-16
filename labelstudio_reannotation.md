@@ -119,9 +119,9 @@ You can open the json file in your browser to see if the annotations were correc
  {"data": {"image": "/data/local-files/?d=one/images/4283.jpg"}, "annotations": [{"result": [{"id": "306500c114", "type": "rectanglelabels", "value": {"x": 30.419921875, "y": 36.8326334733053, "width": 58.49609375, "height": 33.9532093581284, "rotation": 0, "rectanglelabels": ["Illustration"]}
 ```
 
-# Step 5 : Import of the images and there converted annotations
+# Step 5 : Import of the images and their converted annotations
 
-Relauch Label Studio, go to your project and select the import menue and the the Upload Files button.
+Relauch Label Studio, go to your project and select the import menue and the Upload Files button.
 
 Select the output.json file. Normaly both files and annotations should be imported.
 
