@@ -33,13 +33,13 @@ gantt
 ```mermaid
 block-beta
    columns 5
-   Published Datasets space Yolo Format Conversion space Annotations normalization
+   Published_Datasets space Yolo_Format_Conversion space Annotations_Normalization
    space space space space space
    Enrichement space E space D
 
-   Published Datasets --> Yolo Format Conversion
-   Yolo Format Conversion -->  Annotations normalization
-   Annotations normalization --> Enrichement
+   Published_Datasets --> Yolo_Format_Conversion
+   Yolo_Format_Conversion -->  Annotations_Normalization
+   Annotations_Normalization --> Enrichement
    Enrichement --> E
    E --> F
 
