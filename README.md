@@ -10,6 +10,40 @@ GenHisDoc
 ├── Horae LS_V2
 └── Custom (Lujes) 
 ```
+## Project schedule and organisation
+
+```mermaid
+gantt
+    title GenHisDoc Schedule & organisation
+    dateformat yyyy-mm-dd
+    excludes 2026-04-01,2026-07-01
+
+    section Bibliography
+        Datasets review   :a1, 2026-04-01, 13d
+        Ontology review & creation    :after a1, 9d
+
+    section Datasets Creation
+        harmonization of formats :b1, 2026-04-27, 9d
+        harmonization of annotations :b2, after b1, 15d
+        enrichment of annotations :after b2,
+```
+
+## Pipeline of Creation
+
+```mermaid
+block-beta
+   columns 5
+   Published Datasets space Yolo Format Conversion space Annotations normalization
+   space space space space space
+   Enrichement space E space D
+
+   Published Datasets --> Yolo Format Conversion
+   Yolo Format Conversion -->  Annotations normalization
+   Annotations normalization --> Enrichement
+   Enrichement --> E
+   E --> F
+
+```
 
 ## Published Datasets inside GenHisDoc
 
@@ -53,21 +87,3 @@ Published by Stutzmann Dominique 1, Bernard Leterme Lise 1, Boillet Mélodie 2, 
 2 & 3 : Teklia, 30 rue Raymond Losserand, 75014 Paris, France
 
 Modificatons : Horae use a deep annotation system usefull only for manuscript, we reunited this classes into our segmentation ontology. We kept 4244 annotations about ornements, illustrations and initials, and suppressed 18720 annotations about text segmentation.
-
-## Project schedule and organisation
-
-```mermaid
-gantt
-    title GenHisDoc Schedule & organisation
-    dateformat yyyy-mm-dd
-    excludes 2026-04-01,2026-07-01
-
-    section Bibliography
-        Datasets review   :a1, 2026-04-01, 13d
-        Ontology review & creation    :after a1, 9d
-
-    section Datasets Creation
-        harmonization of formats :b1, 2026-04-27, 9d
-        harmonization of annotations :b2, after b1, 15d
-        enrichment of annotations :after b2,
-```
