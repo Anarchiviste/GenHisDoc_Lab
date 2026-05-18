@@ -28,18 +28,17 @@ gantt
         enrichment of annotations :after b2,
 ```
 
-## Pipeline of Creation
+## Pipeline
 
 ```mermaid
 graph LR
     A[Published datasets]  
     subgraph Traitement
-    B[Yolo format conversion] C[Annotations harmonization]
+    B[Yolo format conversion] --> C[Annotations harmonization]
     end
     D[Enrichement]
 
     A --> B
-    B --> C
     C --> D
 
 ```
