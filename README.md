@@ -31,17 +31,15 @@ gantt
 ## Pipeline of Creation
 
 ```mermaid
-block-beta
-   columns 5
-   Published_Datasets space Yolo_Format_Conversion space Annotations_Normalization
-   space space space space space
-   Enrichement space E space D
+    A[Published datasets]  
+    subgraph Traitement
+    B[Yolo format conversion] --> C[Annotations harmonization]
+    end
+    D[Enrichement]
 
-   Published_Datasets --> Yolo_Format_Conversion
-   Yolo_Format_Conversion -->  Annotations_Normalization
-   Annotations_Normalization --> Enrichement
-   Enrichement --> E
-   E --> F
+    A --> B
+    B --> C
+    C --> D
 
 ```
 
