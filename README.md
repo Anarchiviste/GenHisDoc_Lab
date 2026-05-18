@@ -31,6 +31,7 @@ gantt
 ## Pipeline of Creation
 
 ```mermaid
+graph LR
     A[Published datasets]  
     subgraph Traitement
     B[Yolo format conversion] --> C[Annotations harmonization]
