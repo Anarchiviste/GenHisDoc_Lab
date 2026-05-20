@@ -633,40 +633,40 @@ def generating_horae_html(directory: Path) -> None:
         print(f"images annotées crées : {annotations_crées}")
         print(f"annotations ignorées : {annotations_ignorées}")
 
-def generating_newspaper_navigator_html(directory: Path) -> None:
-    images_dir_nwnv = Path("newspaper navigator/images")
-    labels_dir_nwnv = Path("newspaper navigator/labels")
-    
-    identifier_list = []
-    annotations_crées = 0
-    annotations_ignorées = 0
-    
-    print("génération des annotations pour Newspaper Navigator")
-    
-    for filename in tqdm(random.sample(os.listdir(labels_dir_nwnv), 100)):
-        if not filename.endswith(".txt"):
-            continue
-        identifier = filename.replace(".txt", "")
-        output_path = Path(f'generated_html/nwnv_bb_dir/{identifier}.jpg')
-        
-        image = draw_yolo_annotations(
-                images_dir_nwnv / f'{identifier}.jpg',
-                labels_dir_nwnv / f'{identifier}.txt',
-                label_map,
-                )
-        
-        if not output_path.is_file():
-            image.save((output_path))
-            annotations_crées += 1
-        else:
-            annotations_ignorées += 1
-        
-        identifier_list.append(f'{identifier}')
+#def generating_newspaper_navigator_html(directory: Path) -> None:
+#    images_dir_nwnv = Path("newspaper navigator/images")
+#    labels_dir_nwnv = Path("newspaper navigator/labels")
+#    
+#    identifier_list = []
+#    annotations_crées = 0
+#    annotations_ignorées = 0
+#    
+#    print("génération des annotations pour Newspaper Navigator")
+#    
+#    for filename in tqdm(random.sample(os.listdir(labels_dir_nwnv), 100)):
+#        if not filename.endswith(".txt"):
+#            continue
+#        identifier = filename.replace(".txt", "")
+#        output_path = Path(f'generated_html/nwnv_bb_dir/{identifier}.jpg')
+#        
+#        image = draw_yolo_annotations(
+#                images_dir_nwnv / f'{identifier}.jpg',
+#                labels_dir_nwnv / f'{identifier}.txt',
+#                label_map,
+#                )
+#        
+#        if not output_path.is_file():
+#            image.save((output_path))
+#            annotations_crées += 1
+#        else:
+#            annotations_ignorées += 1
+#        
+#        identifier_list.append(f'{identifier}')
 
 generating_index_html(output_dir)
 generating_style_css(output_dir)
 generating_sved_html(output_dir)
 generating_illuhisdoc_html(output_dir)
 generating_horae_html(output_dir)
-generating_newspaper_navigator_html(output_dir)
+# generating_newspaper_navigator_html(output_dir)
     
