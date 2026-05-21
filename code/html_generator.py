@@ -20,7 +20,7 @@ from Lujes.yolo import draw_yolo_annotations
 
 output_dir = Path("generated_html")
 
-dirlist= ["illustrations", "sved_bb_dir", "horae_bb_dir", "illushisdoc_bb_dir", "nwnv_bb_dir"]
+dirlist= ["illustrations", "sved_bb_dir", "horae_bb_dir", "illushisdoc_bb_dir", "aikon_bb_dir"]
 
 if Path(output_dir).is_dir():
     print(f'{output_dir} existe déjà')
@@ -251,6 +251,7 @@ def generating_index_html(directory: Path) -> None:
                         <article><a href="illuhisdoc.html">illuhisdoc</a></article>
                         <article><a href="horae.html">Horae LSv2</a></article>
                         <article><a href="sved.html">S-VED</a></article>
+                        <article><a href="aikon.html">Aikon</a></article
                     </main>
                     <img src="illustrations/total_class_distribution.png">
                 </body>
@@ -633,7 +634,7 @@ def generating_horae_html(directory: Path) -> None:
         print(f"images annotées crées : {annotations_crées}")
         print(f"annotations ignorées : {annotations_ignorées}")
 
-def generating_newspaper_navigator_html(directory: Path) -> None:
+def generating_aikon_html(directory: Path) -> None:
     images_dir_nwnv = Path('Aikon/EphraimChambers|Cyclopaedia/images')
     labels_dir_nwnv = Path('Aikon/EphraimChambers|Cyclopaedia/labels')
     
@@ -641,13 +642,13 @@ def generating_newspaper_navigator_html(directory: Path) -> None:
     annotations_crées = 0
     annotations_ignorées = 0
     
-    print("génération des annotations pour Newspaper Navigator")
+    print("génération des annotations pour Aikon")
     
     for filename in tqdm(os.listdir(labels_dir_nwnv)):
         if not filename.endswith(".txt"):
             continue
         identifier = filename.replace(".txt", "")
-        output_path = Path(f'generated_html/nwnv_bb_dir/{identifier}.jpg')
+        output_path = Path(f'generated_html/aikon_bb_dir/{identifier}.jpg')
         
         image = draw_yolo_annotations(
                 images_dir_nwnv / f'{identifier}.jpg',
@@ -662,11 +663,76 @@ def generating_newspaper_navigator_html(directory: Path) -> None:
             annotations_ignorées += 1
         
         identifier_list.append(f'{identifier}')
+        
+    selection = identifier_list
 
-#generating_index_html(output_dir)
-#generating_style_css(output_dir)
-#generating_sved_html(output_dir)
-#generating_illuhisdoc_html(output_dir)
-#generating_horae_html(output_dir)
-generating_newspaper_navigator_html(output_dir)
+    with open(f'{output_dir}/aikon.html', 'w') as f:
+        f.write(f'''<!DOCTYPE html>
+            <html>
+                <head>
+                    <meta charset="UTF-8">
+                    <link type="text/css" rel="stylesheet" href="style.css">
+                    <script src="visualisation.js" defer></script>
+                </head>
+                <body>
+                <header>
+                    <h1 id="top"><a href="index.html">GenHisDoc</a></h1>
+                    <h2>Horae LSv2</h2>
+                    <p><a href="aikon_image.html">visualisation des images</a></p>
+                </header>
+                <main>
+                    <p>Paper : <a href="https://hal.science/hal-05248250/">AIKON : A Modular Computer Vision Platform for Historical Corpora</a></p>
+                    <p>Published by  Ségolène Albouy (1) , Somkeo Norindr (2) , Paul Kervegan (1) , Fouad Aouinti (3) , Rémy Delanaux (4) , Robin Champenois (1) , Stavros Lazaris (3, 5) , Alexandre Guilbaud (6, 7) , Matthieu Husson (8, 2) , Mathieu Aubry (1) </p>
+                    <ul>
+                        <li>1 : IMAGINE [Marne-la-Vallée] (6 avenue Blaise Pascal - Cité Descartes - Champs-sur-Marne, 77455 Marne-la-Vallée cedex 2 - France) </li>
+                        <li>2 : LTE - Laboratoire Temps Espace (61 avenue de l’Observatoire de Paris 75014 Paris - France)</li>
+                        <li>3 : OM - ORIENT ET MÉDITERRANÉE : Textes, Archéologie, Histoire (Campus CNRS de Villejuif, 7 rue Guy Môquet, 94800 Villejuif - France)</li>
+                        <li>4 : IMJ-PRG (UMR_7586) - Institut de Mathématiques de Jussieu - Paris Rive Gauche (Sorbonne Université - IMJ - Case 247 - 4 place Jussieu 75252 Paris cedex 05 / Université Paris Diderot - Bât. Sophie Germain, case 7012 - France)</li>
+                        <li>5 : ICP - Institut Catholique de Paris (ICP) (21 Rue d'Assas, 75006 Paris - France)</li>
+                        <li>6 : SU - Sorbonne Université (21 rue de l’École de médecine - 75006 Paris - France) </li>
+                        <li>7 : IMJ-PRG (UMR_7586) - Institut de Mathématiques de Jussieu - Paris Rive Gauche (UPMC - 4 place Jussieu, Case 247 - 75252 Paris Cedex 5 UP7D - Campus des Grands Moulins - Bâtiment Sophie Germain, Case 7012- 75205 PARIS Cedex 13 - France)</li>
+                        <li>8 : SYRTE - Systèmes de Référence Temps Espace (61 Av de l'Observatoire 75014 PARIS - France)</li>                        
+                    </ul>
+                    <p>Annotation Project : <a href="https://vhs.huma-num.fr/vhs-admin/">VHS</a></p>
+                    <p>Annotation Project : <a href="https://eida.obspm.fr/eida-admin/login/?next=/eida-admin/">Eida</a></p>
+                
+                    <p>Modifications : Extraction and convertion from AIkon project website to yolo for reannotation and enrichement">
+                </main>
+                </body>
+                <footer>
+                    <a href="#top">Back to top</a>
+                </footer>    
+            </html>
+            ''')        
+
+    with open(f'{output_dir}/aikon_image.html', 'w') as f:
+        f.write('''<!DOCTYPE html>
+                <html>
+                    <head>
+                        <meta charset="UTF-8">
+                        <link type="text/css" rel="stylesheet" href="style.css">
+                        <script src="visualisation.js" defer></script>
+                    </head>
+                    <header>
+                        <h1 id="top"><a href="index.html">GenHisDoc</a></h1>
+                    </header>
+                    <body>
+                ''')
+        for i in selection:
+            f.write(f'<p>image : {i}.jpg</p>\n')
+            f.write(f'<img src="aikon_bb_dir/{i}.jpg">\n')
+
+        f.write('''</body>
+                    <footer>
+                        <a href="#top">Back to top</a>
+                    </footer>
+                </html>
+                ''')
+
+generating_index_html(output_dir)
+generating_style_css(output_dir)
+generating_sved_html(output_dir)
+generating_illuhisdoc_html(output_dir)
+generating_horae_html(output_dir)
+generating_aikon_html(output_dir)
     
