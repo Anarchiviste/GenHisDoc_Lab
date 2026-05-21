@@ -635,8 +635,8 @@ def generating_horae_html(directory: Path) -> None:
         print(f"annotations ignorées : {annotations_ignorées}")
 
 def generating_aikon_html(directory: Path) -> None:
-    images_dir_nwnv = Path('Aikon/EphraimChambers|Cyclopaedia/images')
-    labels_dir_nwnv = Path('Aikon/EphraimChambers|Cyclopaedia/labels')
+    images_dir_aikon= Path('Aikon/EphraimChambers|Cyclopaedia/images')
+    labels_dir_aikon = Path('Aikon/EphraimChambers|Cyclopaedia/labels')
     
     identifier_list = []
     annotations_crées = 0
@@ -644,15 +644,15 @@ def generating_aikon_html(directory: Path) -> None:
     
     print("génération des annotations pour Aikon")
     
-    for filename in tqdm(os.listdir(labels_dir_nwnv)):
+    for filename in tqdm(os.listdir(labels_dir_aikon)):
         if not filename.endswith(".txt"):
             continue
         identifier = filename.replace(".txt", "")
         output_path = Path(f'generated_html/aikon_bb_dir/{identifier}.jpg')
         
         image = draw_yolo_annotations(
-                images_dir_nwnv / f'{identifier}.jpg',
-                labels_dir_nwnv / f'{identifier}.txt',
+                images_dir_aikon / f'{identifier}.jpg',
+                labels_dir_aikon / f'{identifier}.txt',
                 label_map,
                 )
         
@@ -729,10 +729,10 @@ def generating_aikon_html(directory: Path) -> None:
                 </html>
                 ''')
 
-generating_index_html(output_dir)
-generating_style_css(output_dir)
-generating_sved_html(output_dir)
-generating_illuhisdoc_html(output_dir)
-generating_horae_html(output_dir)
+#generating_index_html(output_dir)
+#generating_style_css(output_dir)
+#generating_sved_html(output_dir)
+#generating_illuhisdoc_html(output_dir)
+#generating_horae_html(output_dir)
 generating_aikon_html(output_dir)
     
