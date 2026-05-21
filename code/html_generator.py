@@ -696,7 +696,7 @@ def generating_aikon_html(directory: Path) -> None:
                     <p>Annotation Project : <a href="https://vhs.huma-num.fr/vhs-admin/">VHS</a></p>
                     <p>Annotation Project : <a href="https://eida.obspm.fr/eida-admin/login/?next=/eida-admin/">Eida</a></p>
                 
-                    <p>Modifications : Extraction and convertion from AIkon project website to yolo for reannotation and enrichement">
+                    <p>Modifications : Extraction and convertion from AIkon project website to yolo for reannotation and enrichement"</p>
                 </main>
                 </body>
                 <footer>
@@ -729,10 +729,10 @@ def generating_aikon_html(directory: Path) -> None:
                 </html>
                 ''')
 
-generating_index_html(output_dir)
-generating_style_css(output_dir)
-generating_sved_html(output_dir)
-generating_illuhisdoc_html(output_dir)
-generating_horae_html(output_dir)
+#generating_index_html(output_dir)
+#generating_style_css(output_dir)
+#generating_sved_html(output_dir)
+#generating_illuhisdoc_html(output_dir)
+#generating_horae_html(output_dir)
 generating_aikon_html(output_dir)
     
