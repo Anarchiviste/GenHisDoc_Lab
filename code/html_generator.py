@@ -729,10 +729,10 @@ def generating_aikon_html(directory: Path) -> None:
                 </html>
                 ''')
 
-#generating_index_html(output_dir)
-#generating_style_css(output_dir)
-#generating_sved_html(output_dir)
-#generating_illuhisdoc_html(output_dir)
-#generating_horae_html(output_dir)
+generating_index_html(output_dir)
+generating_style_css(output_dir)
+generating_sved_html(output_dir)
+generating_illuhisdoc_html(output_dir)
+generating_horae_html(output_dir)
 generating_aikon_html(output_dir)
     
