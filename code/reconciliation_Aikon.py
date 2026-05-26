@@ -1,18 +1,35 @@
 import requests
 import iiif_download
 from pathlib import Path
+import re
 
-def aikon_to_yolo(url_manifest: str, url_annotations: str, output_dir: Path) -> None:
+def aikon_to_yolo(url_manifest: str, output_dir: Path) -> None:
+    
+    url_id = url_manifest.replace('https://vhs.huma-num.fr/vhs/iiif/', '')
+    url_id = url_id.replace('/manifest.json', '')
+    print(url_id)
+    match = re.search(r"wit(\d+)", url_id)
+
+    if match:
+        witness_id = match.group(1)
+        print(witness_id)
+        url_annotations = f"https://vhs.huma-num.fr/vhs/witness/{witness_id}/regions/canvas"
+        print(url_annotations)
+    
     def downloading_image_from_manifest(url_manifest: str, output_dir: Path) -> None:
         resultat_manifest = requests.get(url_manifest)
         manifest = resultat_manifest.json()
-        
-        global name
-        name = str(manifest['metadata'][1]['value'])
-        name = name.replace(' ', '')
 
-        images_dir = Path(f"{output_dir}/{name}/images")
-        images_dir.mkdir(parents=True, exist_ok=True)
+        metadata = manifest['metadata']
+        for i in metadata:
+            if i['label'] == '@id':
+                print(i)
+                global name
+                name = i['value']
+                name = name.replace(' ', '')
+                print(name)
+                images_dir = Path(f"{output_dir}/{name}/images")
+                images_dir.mkdir(parents=True, exist_ok=True)
 
         liste_url = []
         
@@ -49,6 +66,7 @@ def aikon_to_yolo(url_manifest: str, url_annotations: str, output_dir: Path) -> 
         annotations_manifest = resultat_annotations.json()
         i_index = []
         for i in annotations_manifest:
+            
             annotations = annotations_manifest.get(i)
 
             page_dictionnaire = img_dict.get(int(i))
@@ -78,9 +96,9 @@ def aikon_to_yolo(url_manifest: str, url_annotations: str, output_dir: Path) -> 
     downloading_image_from_manifest(url_manifest, output_dir)
     iii_annotations_to_yolo(img_dict, url_annotations, output_dir)            
 
-output_dir = "../Aikon"
+output_dir = "Aikon"
         
-aikon_to_yolo("https://vhs.huma-num.fr/vhs/iiif/wit2423_img2550/manifest.json", "https://vhs.huma-num.fr/vhs/witness/2423/regions/canvas", output_dir)
+aikon_to_yolo("https://vhs.huma-num.fr/vhs/iiif/wit2423_img2550/manifest.json", output_dir)
     
 
     
