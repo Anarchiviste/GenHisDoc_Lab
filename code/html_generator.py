@@ -265,7 +265,7 @@ def generating_style_css(directory: Path) -> None:
             ''')
 
 def generating_index_html(directory: Path) -> None:
-    counts_total = counts_horae + counts_illu + counts_sved
+    counts_total = counts_horae + counts_illu + counts_sved + counts_aikon
 
     labels_total = [label_map[k] for k in counts_total.keys()]
     values_total = list(counts_total.values())
