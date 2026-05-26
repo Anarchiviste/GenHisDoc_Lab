@@ -50,6 +50,7 @@ label_map = {
 illuhisdoc_dir = Path("illuhisdoc/all_labels")
 horae_dir = Path("HoraeV2/label_output")
 sved_dir = Path("S-VED/labels")
+aikon_dir = Path("Aikon")
 
 def illuhisdoc_visualisation(input_dir: Path, labels_dict:dict) -> None:
     total_files   = 0
@@ -159,9 +160,49 @@ def sved_visualisation(input_dir:Path, labels_dict:dict) -> None:
     plt.title("sved Class distribution")
     plt.savefig("generated_html/illustrations/sved_class_distribution.png")
 
+def aikon_visualisation(input_dir: Path, labels_dict: dict) -> None:
+    total_files  = 0
+    total_labels = []
+
+    for subdir in Path(input_dir).iterdir():
+        if not subdir.is_dir():
+            continue
+        labels_dir = subdir / "labels"
+        if not labels_dir.exists():
+            continue
+
+        for filename in os.listdir(labels_dir):
+            if not filename.endswith(".txt"):
+                continue
+            total_files += 1
+            input_path = labels_dir / filename
+
+            with open(input_path, "r") as f:
+                lines = f.readlines()
+            for line in lines:
+                parts = line.strip().split()
+                if not parts:
+                    continue
+                label = int(parts[0])
+                total_labels.append(label)
+
+    global counts_aikon
+    counts_aikon = Counter(total_labels)
+    print(f"{total_files} fichiers traités")
+    print(counts_aikon)
+
+    labels_aikon = [labels_dict[k] for k in counts_aikon.keys()]
+    values_aikon = list(counts_aikon.values())
+
+    plt.figure(figsize=(6, 6))
+    plt.pie(values_aikon, labels=labels_aikon, autopct="%1.1f%%")
+    plt.title("Aikon Class distribution")
+    plt.savefig("generated_html/illustrations/aikon_class_distribution.png")
+
 illuhisdoc_visualisation(illuhisdoc_dir, label_map)
 horae_visualisation(horae_dir, label_map)
 sved_visualisation(sved_dir, label_map)
+aikon_visualisation(aikon_dir, label_map)
 
 # GENERATING HTML
 
@@ -635,8 +676,7 @@ def generating_horae_html(directory: Path) -> None:
         print(f"annotations ignorées : {annotations_ignorées}")
 
 def generating_aikon_html(directory: Path) -> None:
-    images_dir_aikon= Path('Aikon/EphraimChambers|Cyclopaedia/images')
-    labels_dir_aikon = Path('Aikon/EphraimChambers|Cyclopaedia/labels')
+    aikon_dir = "Aikon"
     
     identifier_list = []
     annotations_crées = 0
@@ -644,27 +684,35 @@ def generating_aikon_html(directory: Path) -> None:
     
     print("génération des annotations pour Aikon")
     
-    for filename in tqdm(os.listdir(labels_dir_aikon)):
-        if not filename.endswith(".txt"):
-            continue
-        identifier = filename.replace(".txt", "")
+    all_labels = []
+    for subdir in Path(aikon_dir).iterdir():
+        if subdir.is_dir():
+            labels_dir = subdir / "labels"
+            images_dir = subdir / "images"
+            if labels_dir.exists() and images_dir.exists():
+                for label_file in labels_dir.glob("*.txt"):
+                    all_labels.append((label_file, images_dir / f"{label_file.stem}.jpg"))
+    
+    random.shuffle(all_labels)
+    
+    for label_path, image_path in tqdm(all_labels):
+        identifier = label_path.stem
         output_path = Path(f'generated_html/aikon_bb_dir/{identifier}.jpg')
-        
+    
         image = draw_yolo_annotations(
-                images_dir_aikon / f'{identifier}.jpg',
-                labels_dir_aikon / f'{identifier}.txt',
-                label_map,
-                )
-        
+            image_path,
+            label_path,
+            label_map,
+        )
+    
         if not output_path.is_file():
-            image.save((output_path))
+            image.save(output_path)
             annotations_crées += 1
         else:
             annotations_ignorées += 1
-        
-        identifier_list.append(f'{identifier}')
-        
-    selection = identifier_list
+        identifier_list.append(identifier)
+    
+    selection = random.sample(identifier_list, 100)  
 
     with open(f'{output_dir}/aikon.html', 'w') as f:
         f.write(f'''<!DOCTYPE html>
@@ -697,6 +745,23 @@ def generating_aikon_html(directory: Path) -> None:
                     <p>Annotation Project : <a href="https://eida.obspm.fr/eida-admin/login/?next=/eida-admin/">Eida</a></p>
                 
                     <p>Modifications : Extraction and convertion from AIkon project website to yolo for reannotation and enrichement</p>
+
+                    <img src="illustrations/aikon_class_distribution.png">
+
+                    <article>
+                        <p><a href="https://vhs.huma-num.fr/vhs-admin/">VHS</a></p>
+                        <ul>
+                            <li>Witness #2320 : Cyclopaedia, 5e éd., Vol. 2 - annotated by Alexandre</li>
+                            <li>Witness #2365 : Latin 7416 | Paris, BnF - annotated by Alexandre</li>
+                            <li>Witness #2377 : Cod. 44 | Österreichische Nationalbibliothek - annotated by Alexandre</li>
+                            <li>Witness #2416 : Lat. Q. 9 | Universiteitsbibliotheek - annotated by Alexandre</li>
+                            <li>Witness #2418 : Voss. Lat. Q. 40 | Universiteitsbibliotheek - annotated by Alexandre</li>
+                            <li>Witness #2420 : 187 | Wien, Österreichische Nationalbibliothek - annotated by Alexandre</li>
+                            <li>Witness #2421 : T. 47 | Biblioteca Ambrosiana - annotated by Alexandre</li>
+                            <li>Witness #2387 : Latin 13955 | Paris, BnF - annotated by Alexandre </li>
+                            <li>Witness #2423 : Dc 183 | Dresden, Sächsische Landesbibliothek - annotated by Alexandre </li>
+                        </ul> 
+                    </article>
                 </main>
                 </body>
                 <footer>
