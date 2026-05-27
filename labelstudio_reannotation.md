@@ -84,10 +84,24 @@ In the webapp Label Studio, create a new project:
 
 ## 3.2 : Setting up local storage
 
-In your new project, select `Connect Cloud Storage` and select `Local Files`.
+In your new project, select `Connect Cloud Storage` > `Local Files`.
 - Enter a Name for your local storage.
 - Enter an absolute path to your root, in our case `/home/user/labelstudio/yolo/datasets/one` and verify the connection.
 - Choose the `files` import method, review and press the `Save & Sync` button.
+
+## 3.3 : Create a labeling interface for our datasets
+
+In your new project select `Settings` > `Labeling Interface` > `Code` and copy paste the code below.
+
+```xml
+<View>
+  <Image name="image" value="$image"/>
+  <RectangleLabels name="label" toName="image">
+    
+    
+  <Label value="Illustration" background="#FFA39E"/><Label value="Initial" background="#D4380D"/><Label value="Table" background="#FFC069"/><Label value="Stamp" background="#AD8B00"/><Label value="Decoration" background="#D3F261"/></RectangleLabels>
+</View>
+```
 
 # Step 4 : Convertion between Yolo annotations and Label Studio JSON
 
@@ -116,7 +130,7 @@ labelstudio
 
 You can open the json file in your browser to see if the annotations were correctly translated in the Label Studio format. To get your annotation to work you need to see if an "annotations" with x, y, width and height and a rectanglelabels are present.
 ```json
- {"data": {"image": "/data/local-files/?d=one/images/4283.jpg"}, "annotations": [{"result": [{"id": "306500c114", "type": "rectanglelabels", "value": {"x": 30.419921875, "y": 36.8326334733053, "width": 58.49609375, "height": 33.9532093581284, "rotation": 0, "rectanglelabels": ["Illustration"]}
+ {"data": {"image": "/data/local-files/?d=one/images/4283.jpg"}, "annotations": [{"result": [{"id": "306500c114", "type": "rectanglelabels", "value": {"x": 30.419921875, "y": 36.8326334733053, "width": 58.49609375, "height": 33.9532093581284, "rotation": 0, "rectanglelabels": ["Illustration"]}}]}]}
 ```
 
 # Step 5 : Import of the images and their converted annotations
@@ -124,16 +138,4 @@ You can open the json file in your browser to see if the annotations were correc
 Relauch Label Studio, go to your project and select the import menue and the Upload Files button.
 
 Select the output.json file. Normaly both files and annotations should be imported.
-
-# Step 6 : Create a labeling interface for our datasets
-
-```xml
-<View>
-  <Image name="image" value="$image"/>
-  <RectangleLabels name="label" toName="image">
-    
-    
-  <Label value="Illustration" background="#FFA39E"/><Label value="Initial" background="#D4380D"/><Label value="Table" background="#FFC069"/><Label value="Stamp" background="#AD8B00"/><Label value="Decoration" background="#D3F261"/></RectangleLabels>
-</View>
-```
 
