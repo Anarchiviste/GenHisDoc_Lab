@@ -86,6 +86,8 @@ Published by Stutzmann Dominique 1, Bernard Leterme Lise 1, Boillet Mélodie 2, 
 
 Modificatons : Horae use a deep annotation system usefull only for manuscript, we reunited this classes into our segmentation ontology. We kept 4244 annotations about ornements, illustrations and initials, and suppressed 18720 annotations about text segmentation.
 
+## Unpublished Datasets inside GenHisDoc
+
 ### Aikon / Projet VHS / Eida 
 
 [Aikon](https://aikon-platform.github.io/) is a IIIF automatic annotation project financed by the ERC project DISCOVER and developped between the [IMAGINE-LIGM laboratory at École nationale des ponts et chaussées](https://imagine-lab.enpc.fr/), [LTE laboratory at Observatoire de Paris-PSL](https://lte.observatoiredeparis.psl.eu/). Aikon is not a dataset, we aggregated and formated the open and human corrected annotated witness by the community in the Project VHS and Eida environnement of Aikon.
@@ -113,3 +115,7 @@ Witness #2421 : T. 47 | Biblioteca Ambrosiana - annotated by Alexandre
 Witness #2387 : Latin 13955 | Paris, BnF - annotated by Alexandre 
 
 Witness #2423 : Dc 183 | Dresden, Sächsische Landesbibliothek - annotated by Alexandre 
+
+### My own annotated documents
+
+
