@@ -125,3 +125,15 @@ Relauch Label Studio, go to your project and select the import menue and the Upl
 
 Select the output.json file. Normaly both files and annotations should be imported.
 
+# Step 6 : Create a labeling interface for our datasets
+
+```xml
+<View>
+  <Image name="image" value="$image"/>
+  <RectangleLabels name="label" toName="image">
+    
+    
+  <Label value="Illustration" background="#FFA39E"/><Label value="Initial" background="#D4380D"/><Label value="Table" background="#FFC069"/><Label value="Stamp" background="#AD8B00"/><Label value="Decoration" background="#D3F261"/></RectangleLabels>
+</View>
+```
+
