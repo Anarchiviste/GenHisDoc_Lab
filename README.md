@@ -95,3 +95,21 @@ Modificatons : Horae use a deep annotation system usefull only for manuscript, w
  [VHS](https://vhs.hypotheses.org/) is an interdisciplinary research project bringing together specialists in History of Science and Computer Vision to develop a new approach in the historical analysis of the circulation of scientific knowledge and the development of a visual scientific thought from the Middle Ages to the modern era, based on new methods of illustration analysis. 
 
  
+
+Witness #2320 : Cyclopaedia, 5e éd., Vol. 2 - annotated by Alexandre
+
+Witness #2365 : Latin 7416 | Paris, BnF - annotated by Alexandre
+
+Witness #2377 : Cod. 44 | Österreichische Nationalbibliothek - annotated by Alexandre
+
+Witness #2416 : Lat. Q. 9 | Universiteitsbibliotheek - annotated by Alexandre
+
+Witness #2418 : Voss. Lat. Q. 40 | Universiteitsbibliotheek - annotated by Alexandre
+
+Witness #2420 : 187 | Wien, Österreichische Nationalbibliothek - annotated by Alexandre
+
+Witness #2421 : T. 47 | Biblioteca Ambrosiana - annotated by Alexandre
+
+Witness #2387 : Latin 13955 | Paris, BnF - annotated by Alexandre 
+
+Witness #2423 : Dc 183 | Dresden, Sächsische Landesbibliothek - annotated by Alexandre 
