@@ -135,7 +135,7 @@ You can open the json file in your browser to see if the annotations were correc
 
 # Step 5 : Import of the images and their converted annotations
 
-Relauch Label Studio, go to your project and select the import menue and the Upload Files button.
+Relauch Label Studio, go to your project and select the `import` menue and the `Upload Files` button.
 
 Select the output.json file. Normaly both files and annotations should be imported.
 
