@@ -20,8 +20,8 @@ def reconciliation_Horae(directory: Path) -> None:
     
     label_mapping = {
         0: 0, # miniature => Illustration
-        1: 1, # marginal medallion => Decoration
-        2: 1, # marginal decoration => Decoration
+        1: 1, # marginal medallion => ornament
+        2: 1, # marginal decoration => ornament
         3: 2, # ornemented initial => Initial
         4: 2, # historiated initial => Initial
         5: None, # simple initial
@@ -31,7 +31,7 @@ def reconciliation_Horae(directory: Path) -> None:
         9: None, # rubrification
         10: None, # line filler
         11: None, # music notation
-        12: 1, # ornament => decoration
+        12: 1, # ornament => ornament
         13: None, # text zone
     }
     input_dir  = directory / "labels"   # dossier contenant vos .txt originaux

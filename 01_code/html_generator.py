@@ -39,9 +39,9 @@ for i in dirlist:
 
 label_map = {
     0: "Illustration",
-    1: "Decoration",
+    1: "Ornament",
     2: "Initial",
-    3: "Stamps",
+    3: "Stamp",
     4: "Table",
     }
 
@@ -367,7 +367,7 @@ def generating_sved_html(directory: Path) -> None:
                         <hr>
                         <li>Illustrations : {counts_sved[0]}</li>
                         <li>Initials: {counts_sved[2]}</li>
-                        <li>Decoration: {counts_sved[1]}</li>
+                        <li>Ornaments: {counts_sved[1]}</li>
                     </ul>
                 </main>
                 </body>
@@ -637,7 +637,7 @@ def generating_horae_html(directory: Path) -> None:
                         <li>Total : {total_value}</li>
                         <hr>
                         <li>Initials: {counts_horae[2]}</li>
-                        <li>Decoration: {counts_horae[1]}</li>
+                        <li>Ornaments: {counts_horae[1]}</li>
                         <li>Illustrations : {counts_horae[0]}</li>
                     </ul>
                 </main>

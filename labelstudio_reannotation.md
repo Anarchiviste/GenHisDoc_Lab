@@ -56,10 +56,10 @@ A yolo annotation look like this so you need a classes.txt file that will tell L
 0 0.41 0.283681636282792 0.340666666666667 0.321920853712761
 ```
 
-Here is the inside of my classes.txt file : 
+Here is what is inside my classes.txt file :
 ```
 Illustration
-Decoration
+Ornament
 Initial
 Stamp
 Table
@@ -99,7 +99,7 @@ In your new project select `Settings` > `Labeling Interface` > `Code` and copy p
   <RectangleLabels name="label" toName="image">
     
     
-  <Label value="Illustration" background="#FFA39E"/><Label value="Initial" background="#D4380D"/><Label value="Table" background="#FFC069"/><Label value="Stamp" background="#AD8B00"/><Label value="Decoration" background="#D3F261"/></RectangleLabels>
+  <Label value="Illustration" background="#FFA39E"/><Label value="Initial" background="#D4380D"/><Label value="Table" background="#FFC069"/><Label value="Stamp" background="#AD8B00"/><Label value="Ornament" background="#D3F261"/></RectangleLabels>
 </View>
 ```
 
