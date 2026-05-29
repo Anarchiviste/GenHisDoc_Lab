@@ -1,9 +1,10 @@
 import requests
-import iiif_download
 from pathlib import Path
 import re
 
 def vhs_to_yolo(url_manifest: str, output_dir: Path) -> None:
+
+    #r"(^https:\/\/.*)\/(.*)\/(.*\/wit)(\d+)(.*)\/(manifest\.json)"
     
     url_id = url_manifest.replace('https://vhs.huma-num.fr/vhs/iiif/', '')
     url_id = url_id.replace('/manifest.json', '')

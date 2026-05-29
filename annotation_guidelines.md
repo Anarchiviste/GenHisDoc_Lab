@@ -22,5 +22,14 @@ An ornament is a graphic element that decorates or embellishes a document withou
 
 An ornament is most often an abstract form of illustration, composed of classical patterns (plant ornaments, abstract headpieces, "cul-de-lampe") or repetitive motifs with no meaning other than their intrinsic value as ornaments.
 
+### Initial
 
+An inital letter is a letter placed at the start of a text, a paragraph or a page to signify the start of the text. We can divide initials into two category : 
 
+- The principal initials, at the start of a book, a new section, a new chapter. They can be decorated (illuminated, historiated) or not. 
+
+- Secondary initials, at the start of every paragraphs, a lot of the time a simplier and easier to drown or print.
+
+- The pilcrow (¶) is a sign used to identify a paragraph. In manuscripts this sign can be mistaken for an initial. It must not be annotated.
+
+We actually only want to annotate the most important initials. It's not possible to establish standard rules for annotating initials, but we can base ourselves on the following principle: "If an initial appears large, important, and aesthetically pleasing in the context of the text, then it should be annotated as an initial."

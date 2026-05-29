@@ -85,7 +85,7 @@ def illuhisdoc_visualisation(input_dir: Path, labels_dict:dict) -> None:
 
     plt.figure(figsize=(6, 6))
     plt.pie(values_illu, labels=labels_illu, autopct="%1.1f%%")
-    plt.title("illuhisdoc Class distribution")
+    plt.title("illuhisdoc classes distribution")
     plt.savefig("generated_html/illustrations/illushisdoc_class_distribution.png")
 
 def horae_visualisation(input_dir:Path, labels_dict:dict) -> None:
@@ -121,7 +121,7 @@ def horae_visualisation(input_dir:Path, labels_dict:dict) -> None:
 
     plt.figure(figsize=(6, 6))
     plt.pie(values_horae, labels=labels_horae, autopct="%1.1f%%")
-    plt.title("Horae Class distribution")
+    plt.title("Horae classes distribution")
     plt.savefig("generated_html/illustrations/horae_class_distribution.png")
 
 def sved_visualisation(input_dir:Path, labels_dict:dict) -> None:
@@ -157,7 +157,7 @@ def sved_visualisation(input_dir:Path, labels_dict:dict) -> None:
 
     plt.figure(figsize=(6, 6))
     plt.pie(values_sved, labels=labels_sved, autopct="%1.1f%%")
-    plt.title("sved Class distribution")
+    plt.title("sved classes distribution")
     plt.savefig("generated_html/illustrations/sved_class_distribution.png")
 
 def aikon_visualisation(input_dir: Path, labels_dict: dict) -> None:
@@ -196,7 +196,7 @@ def aikon_visualisation(input_dir: Path, labels_dict: dict) -> None:
 
     plt.figure(figsize=(6, 6))
     plt.pie(values_aikon, labels=labels_aikon, autopct="%1.1f%%")
-    plt.title("Aikon Class distribution")
+    plt.title("Aikon classes distribution")
     plt.savefig("generated_html/illustrations/aikon_class_distribution.png")
 
 illuhisdoc_visualisation(illuhisdoc_dir, label_map)
@@ -272,7 +272,7 @@ def generating_index_html(directory: Path) -> None:
 
     plt.figure(figsize=(6, 6))
     plt.pie(values_total, labels=labels_total, autopct="%1.1f%%")
-    plt.title("Total class distribution")
+    plt.title("Total classes distribution")
     plt.savefig("generated_html/illustrations/total_class_distribution.png")
 
     with open(f'{directory}/index.html', 'w') as f:
@@ -360,7 +360,7 @@ def generating_sved_html(directory: Path) -> None:
                         <li>4 : The Cohn Institute for the History and Philosophy of Science and Ideas, Faculty of Humanities, Tel Aviv University, P.O. Box 39040, Ramat Aviv, Tel Aviv 6139001, Israel</li>
                     </ul>
                     <p>Datasets : <a href="https://zenodo.org/record/7142456">Sacrobosco Dataset</a></p>
-                    <p>Modifications : The printer's mark annotation classe has been transfered to the illustration annotation classe. The format of the annotation in csv as been transformed into yolo style format with a txt attached to the image.</p>
+                    <p>Modifications : The printer's mark annotation class has been transfered to the illustration annotation class. The format of the annotation in csv as been transformed into yolo style format with a txt attached to the image.</p>
                     <img src="illustrations/sved_class_distribution.png">
                     <ul>
                         <li>Total : {total_value}</li>
