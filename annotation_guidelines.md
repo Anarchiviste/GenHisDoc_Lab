@@ -48,4 +48,8 @@ Before the widespread use of the stamp, book owners used a handwritten bookplate
 
 ### Table
 
-A table is an arrangement of information or data, usually in rows and columns, or possibly according to a more complex structure.
+A table is an arrangement of information or data, usually in rows and columns, or possibly according to a more complex structure. 
+
+For tables, the header and the footer must taken inside the annotation if it is present. 
+
+In historical documents, some informations can have a circular representation and should be annotated as table. 
