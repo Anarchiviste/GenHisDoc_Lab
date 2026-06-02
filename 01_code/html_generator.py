@@ -762,6 +762,22 @@ def generating_aikon_html(directory: Path) -> None:
                             <li>Witness #2423 : Dc 183 | Dresden, Sächsische Landesbibliothek - annotated by Alexandre </li>
                         </ul> 
                     </article>
+                    <article>
+                        <p><a href="https://eida.obspm.fr/eida-admin/">Eida</a></p>
+                        <ul>
+                            <li>Witness #9 : gr. 2509 | Bibliothèque nationale de France - annotated by dmanolova</li>
+                            <li>Witness #102 : Landberg 493 | Staatsbibliothek - annotated by strigg</li>
+                            <li>Witness #290 : Clm 14583 | Bayerische Staatsbibliothek - annotated by ccartier</li>
+                            <li>Witness #294 : Canon Misc 161 | Bodleian Libraries, University of Oxford - annotated by ccartier</li>
+                            <li>Witness #312 : Palat. Lat. 1369 | Biblioteca Apostolica Vaticana - annotated by ccartier</li>
+                            <li>Witness #328 : 5296 | Österreichische Nationalbibliothek - annotated by ccartier</li>
+                            <li>Witness #376 : No id | Unknown place of conservation - annotated by fsomer</li>
+                            <li>Witness #360 : Supplément turc 242 | Bibliothèque nationale de France - annotated by fsomer</li>
+                            <li>Witness #362 : Sanscrit 964 | Bibliothèque nationale de France - annotated by fsomer</li>
+                            <li>Witness #364 : Arabe 2583 | Bibliothèque nationale de France - annotated by fsomer</li>
+                        </ul>
+                    </article>
+                    
                 </main>
                 </body>
                 <footer>
