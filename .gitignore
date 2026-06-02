@@ -6,7 +6,8 @@ bin/
 etc/
 share/
 log/
-
+lib64
+pyvenv.cfg
 # Variables d'environnement — NE JAMAIS commiter ce fichier !
 .env
 
