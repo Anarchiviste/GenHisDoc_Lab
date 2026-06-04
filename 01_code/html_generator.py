@@ -47,8 +47,8 @@ label_map = {
 
 # GENERATING THE PIE ILLUSTRATIONS
 
-illuhisdoc_dir = Path("illuhisdoc/all_labels")
-horae_dir = Path("HoraeV2/label_output")
+illuhisdoc_dir = Path("illuhisdoc/labels")
+horae_dir = Path("HoraeV2/labels")
 sved_dir = Path("S-VED/labels")
 aikon_dir = Path("Aikon")
 
@@ -579,7 +579,7 @@ def generating_illuhisdoc_html(directory: Path) -> None:
 def generating_horae_html(directory: Path) -> None:
       
     images_dir_horae = Path("HoraeV2/images")
-    labels_dir_horae = Path("HoraeV2/label_output")
+    labels_dir_horae = Path("HoraeV2/labels")
     
     identifier_list = []
     annotations_crées = 0
