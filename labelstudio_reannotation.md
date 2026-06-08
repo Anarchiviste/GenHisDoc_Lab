@@ -99,7 +99,7 @@ In your new project select `Settings` > `Labeling Interface` > `Code` and copy p
   <RectangleLabels name="label" toName="image">
     
     
-  <Label value="Illustration" background="#FFA39E"/><Label value="Initial" background="#D4380D"/><Label value="Table" background="#FFC069"/><Label value="Stamp" background="#AD8B00"/><Label value="Ornament" background="#D3F261"/></RectangleLabels>
+  <Label value="Illustration" background="#FF0052"/><Label value="Initial" background="#FFD400"/><Label value="Table" background="#00C68D"/><Label value="Stamp" background="#0055DA"/><Label value="Ornament" background="#443199"/></RectangleLabels>
 </View>
 ```
 
