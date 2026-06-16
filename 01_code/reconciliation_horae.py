@@ -13,6 +13,7 @@ from scipy.stats import gaussian_kde
 from ultralytics.data.utils import visualize_image_annotations
 import os
 
+# Transforme le dataset Horae LSV2 into a yolo based dataset. 
 
 DATASET_DIR = Path("/home/lunes/Documents/GenHisDoc/HoraeV2/")
 

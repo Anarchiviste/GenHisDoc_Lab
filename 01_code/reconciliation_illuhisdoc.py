@@ -11,8 +11,9 @@ import argparse
 import matplotlib.gridspec as gridspec
 from scipy.stats import gaussian_kde
 
-DATASET_DIR = Path("illuhisdoc/p/")
+# Transforme le dataset illuhisdoc into a yolo based dataset. 
 
+DATASET_DIR = Path("illuhisdoc/p/")
 
 def recreation_yolo_txt(Dataset_dir: str) -> None:
     label = 0

@@ -18,24 +18,32 @@ from tqdm import tqdm
 import random
 from utilitaires.yolo import draw_yolo_annotations
 
+# Produit un site statique de présentation des datasets, des informations de publication, de la répartition des classes, et une visualisation aléatoire de quelques images.
+#
 output_dir = Path("generated_html")
 
-dirlist= ["illustrations", "sved_bb_dir", "horae_bb_dir", "illushisdoc_bb_dir", "aikon_bb_dir"]
+dirlist = [
+    "illustrations",
+    "sved_bb_dir",
+    "horae_bb_dir",
+    "illushisdoc_bb_dir",
+    "aikon_bb_dir",
+]
 
 if Path(output_dir).is_dir():
-    print(f'{output_dir} existe déjà')
+    print(f"{output_dir} existe déjà")
     pass
-else: 
+else:
     output_dir.mkdir()
 
 for i in dirlist:
-    subdir = Path(f'{output_dir}/{i}')
+    subdir = Path(f"{output_dir}/{i}")
     if Path(subdir).is_dir():
-        print(f'{subdir} existe déjà')
+        print(f"{subdir} existe déjà")
         pass
-    else: 
+    else:
         subdir.mkdir()
-        print(f'{subdir} created')
+        print(f"{subdir} created")
 
 label_map = {
     0: "Illustration",
@@ -43,7 +51,7 @@ label_map = {
     2: "Initial",
     3: "Stamp",
     4: "Table",
-    }
+}
 
 # GENERATING THE PIE ILLUSTRATIONS
 
@@ -52,17 +60,18 @@ horae_dir = Path("HoraeV2/labels")
 sved_dir = Path("S-VED/labels")
 aikon_dir = Path("Aikon")
 
-def illuhisdoc_visualisation(input_dir: Path, labels_dict:dict) -> None:
-    total_files   = 0
+
+def illuhisdoc_visualisation(input_dir: Path, labels_dict: dict) -> None:
+    total_files = 0
 
     total_labels = []
 
     for filename in os.listdir(input_dir):
         if not filename.endswith(".txt"):
             continue
-        
+
         total_files = total_files + 1
-        input_path  = os.path.join(input_dir,  filename)
+        input_path = os.path.join(input_dir, filename)
 
         with open(input_path, "r") as f:
             lines = f.readlines()
@@ -71,7 +80,7 @@ def illuhisdoc_visualisation(input_dir: Path, labels_dict:dict) -> None:
             parts = line.strip().split()
             if not parts:
                 continue
-            
+
             label = int(parts[0])
 
             total_labels.append(label)
@@ -79,7 +88,7 @@ def illuhisdoc_visualisation(input_dir: Path, labels_dict:dict) -> None:
     global counts_illu
     counts_illu = Counter(total_labels)
     print(counts_illu)
-    
+
     labels_illu = [labels_dict[k] for k in counts_illu.keys()]
     values_illu = list(counts_illu.values())
 
@@ -88,17 +97,18 @@ def illuhisdoc_visualisation(input_dir: Path, labels_dict:dict) -> None:
     plt.title("illuhisdoc classes distribution")
     plt.savefig("generated_html/illustrations/illushisdoc_class_distribution.png")
 
-def horae_visualisation(input_dir:Path, labels_dict:dict) -> None:
-    total_files   = 0
+
+def horae_visualisation(input_dir: Path, labels_dict: dict) -> None:
+    total_files = 0
 
     total_labels = []
 
     for filename in os.listdir(input_dir):
         if not filename.endswith(".txt"):
             continue
-        
+
         total_files = total_files + 1
-        input_path  = os.path.join(input_dir,  filename)
+        input_path = os.path.join(input_dir, filename)
 
         with open(input_path, "r") as f:
             lines = f.readlines()
@@ -107,7 +117,7 @@ def horae_visualisation(input_dir:Path, labels_dict:dict) -> None:
             parts = line.strip().split()
             if not parts:
                 continue
-            
+
             label = int(parts[0])
 
             total_labels.append(label)
@@ -124,17 +134,18 @@ def horae_visualisation(input_dir:Path, labels_dict:dict) -> None:
     plt.title("Horae classes distribution")
     plt.savefig("generated_html/illustrations/horae_class_distribution.png")
 
-def sved_visualisation(input_dir:Path, labels_dict:dict) -> None:
-    total_files   = 0
+
+def sved_visualisation(input_dir: Path, labels_dict: dict) -> None:
+    total_files = 0
 
     total_labels = []
 
     for filename in os.listdir(input_dir):
         if not filename.endswith(".txt"):
             continue
-        
+
         total_files = total_files + 1
-        input_path  = os.path.join(input_dir,  filename)
+        input_path = os.path.join(input_dir, filename)
 
         with open(input_path, "r") as f:
             lines = f.readlines()
@@ -143,7 +154,7 @@ def sved_visualisation(input_dir:Path, labels_dict:dict) -> None:
             parts = line.strip().split()
             if not parts:
                 continue
-            
+
             label = int(parts[0])
 
             total_labels.append(label)
@@ -160,8 +171,9 @@ def sved_visualisation(input_dir:Path, labels_dict:dict) -> None:
     plt.title("sved classes distribution")
     plt.savefig("generated_html/illustrations/sved_class_distribution.png")
 
+
 def aikon_visualisation(input_dir: Path, labels_dict: dict) -> None:
-    total_files  = 0
+    total_files = 0
     total_labels = []
 
     for subdir in Path(input_dir).iterdir():
@@ -199,6 +211,7 @@ def aikon_visualisation(input_dir: Path, labels_dict: dict) -> None:
     plt.title("Aikon classes distribution")
     plt.savefig("generated_html/illustrations/aikon_class_distribution.png")
 
+
 illuhisdoc_visualisation(illuhisdoc_dir, label_map)
 horae_visualisation(horae_dir, label_map)
 sved_visualisation(sved_dir, label_map)
@@ -206,9 +219,11 @@ aikon_visualisation(aikon_dir, label_map)
 
 # GENERATING HTML
 
+
 def generating_style_css(directory: Path) -> None:
-    with open(f'{directory}/style.css', 'w') as f:
-        f.write('''body {
+    with open(f"{directory}/style.css", "w") as f:
+        f.write(
+            """body {
               font-family: courier;
               margin-left: 30%;
               margin-right: 30%;
@@ -262,7 +277,9 @@ def generating_style_css(directory: Path) -> None:
                 width : 70%;
                 height: auto;
             }
-            ''')
+            """
+        )
+
 
 def generating_index_html(directory: Path) -> None:
     counts_total = counts_horae + counts_illu + counts_sved + counts_aikon
@@ -275,8 +292,9 @@ def generating_index_html(directory: Path) -> None:
     plt.title("Total classes distribution")
     plt.savefig("generated_html/illustrations/total_class_distribution.png")
 
-    with open(f'{directory}/index.html', 'w') as f:
-        f.write('''<!DOCTYPE html>
+    with open(f"{directory}/index.html", "w") as f:
+        f.write(
+            """<!DOCTYPE html>
             <html>
                 <head>
                     <meta charset="UTF-8">
@@ -300,44 +318,47 @@ def generating_index_html(directory: Path) -> None:
                     <a href="#top">Back to top</a>
                 </footer>
            </html>
-           ''')
+           """
+        )
+
 
 def generating_sved_html(directory: Path) -> None:
-    
+
     images_dir = Path("S-VED/images")
     labels_dir = Path("S-VED/labels")
     identifier_list = []
     annotations_crées = 0
     annotations_ignorées = 0
-    
+
     print("génération des annotations pour S-VED")
 
     for filename in tqdm(random.sample(os.listdir(labels_dir), 100)):
         if not filename.endswith(".txt"):
             continue
         identifier = filename.replace(".txt", "")
-        output_path = Path(f'generated_html/sved_bb_dir/{identifier}.jpg')
-        
+        output_path = Path(f"generated_html/sved_bb_dir/{identifier}.jpg")
+
         image = draw_yolo_annotations(
-                images_dir / f'{identifier}.jpg',
-                labels_dir / f'{identifier}.txt',
-                label_map,
-                )
-        
+            images_dir / f"{identifier}.jpg",
+            labels_dir / f"{identifier}.txt",
+            label_map,
+        )
+
         if not output_path.is_file():
             image.save((output_path))
             annotations_crées += 1
         else:
             annotations_ignorées += 1
-        
-        identifier_list.append(f'{identifier}')
-    
+
+        identifier_list.append(f"{identifier}")
+
     selection = random.sample(identifier_list, 50)
 
     total_value = sum(counts_sved.values())
 
-    with open(f'{output_dir}/sved.html', 'w') as f:
-        f.write(f'''<!DOCTYPE html>
+    with open(f"{output_dir}/sved.html", "w") as f:
+        f.write(
+            f"""<!DOCTYPE html>
             <html>
                 <head>
                     <meta charset="UTF-8">
@@ -375,10 +396,12 @@ def generating_sved_html(directory: Path) -> None:
                     <a href="#top">Back to top</a>
                 </footer>    
             </html>
-            ''')
-        
-    with open(f'{output_dir}/sved_image.html', 'w') as f:
-        f.write('''<!DOCTYPE html>
+            """
+        )
+
+    with open(f"{output_dir}/sved_image.html", "w") as f:
+        f.write(
+            """<!DOCTYPE html>
                 <html>
                     <head>
                         <meta charset="UTF-8">
@@ -389,29 +412,33 @@ def generating_sved_html(directory: Path) -> None:
                         <h1 id="top"><a href="index.html">GenHisDoc</a></h1>
                     </header>
                     <body>
-                ''')
+                """
+        )
         for i in selection:
-            f.write(f'<p>image : {i}.jpg</p>\n')
+            f.write(f"<p>image : {i}.jpg</p>\n")
             f.write(f'<img src="sved_bb_dir/{i}.jpg">\n')
 
-        f.write('''</body>
+        f.write(
+            """</body>
                     <footer>
                         <a href="#top">Back to top</a>
                     </footer>
                 </html>
-                ''')
+                """
+        )
 
         print(f"images annotées crées : {annotations_crées}")
-        print(f"annotations ignorées : {annotations_ignorées}")     
+        print(f"annotations ignorées : {annotations_ignorées}")
+
 
 def generating_illuhisdoc_html(directory: Path) -> None:
-    
+
     images_dir_msd = Path("illuhisdoc/msd/images")
     labels_dir_msd = Path("illuhisdoc/msd/labels")
-    
+
     images_dir_msi = Path("illuhisdoc/msi/images")
     labels_dir_msi = Path("illuhisdoc/msi/labels")
-    
+
     images_dir_mss = Path("illuhisdoc/mss/images")
     labels_dir_mss = Path("illuhisdoc/mss/labels")
 
@@ -421,28 +448,28 @@ def generating_illuhisdoc_html(directory: Path) -> None:
     identifier_list = []
     annotations_crées = 0
     annotations_ignorées = 0
-    
+
     print("génération des annotations pour illuhisdoc drawing")
 
     for filename in tqdm(random.sample(os.listdir(labels_dir_msd), 25)):
         if not filename.endswith(".txt"):
             continue
         identifier = filename.replace(".txt", "")
-        output_path = Path(f'generated_html/illushisdoc_bb_dir/{identifier}.jpg')
-        
+        output_path = Path(f"generated_html/illushisdoc_bb_dir/{identifier}.jpg")
+
         image = draw_yolo_annotations(
-                images_dir_msd / f'{identifier}.jpg',
-                labels_dir_msd / f'{identifier}.txt',
-                label_map,
-                )
-        
+            images_dir_msd / f"{identifier}.jpg",
+            labels_dir_msd / f"{identifier}.txt",
+            label_map,
+        )
+
         if not output_path.is_file():
             image.save((output_path))
             annotations_crées += 1
         else:
             annotations_ignorées += 1
-        
-        identifier_list.append(f'{identifier}')
+
+        identifier_list.append(f"{identifier}")
 
     print("génération des annotations pour illuhisdoc initial")
 
@@ -450,70 +477,71 @@ def generating_illuhisdoc_html(directory: Path) -> None:
         if not filename.endswith(".txt"):
             continue
         identifier = filename.replace(".txt", "")
-        output_path = Path(f'generated_html/illushisdoc_bb_dir/{identifier}.jpg')
-        
+        output_path = Path(f"generated_html/illushisdoc_bb_dir/{identifier}.jpg")
+
         image = draw_yolo_annotations(
-                images_dir_msi / f'{identifier}.jpg',
-                labels_dir_msi / f'{identifier}.txt',
-                label_map,
-                )
-        
+            images_dir_msi / f"{identifier}.jpg",
+            labels_dir_msi / f"{identifier}.txt",
+            label_map,
+        )
+
         if not output_path.is_file():
             image.save((output_path))
             annotations_crées += 1
         else:
             annotations_ignorées += 1
-        
-        identifier_list.append(f'{identifier}')
- 
+
+        identifier_list.append(f"{identifier}")
+
     print("génération des annotations pour illuhisdoc science")
 
     for filename in tqdm(random.sample(os.listdir(labels_dir_mss), 25)):
         if not filename.endswith(".txt"):
             continue
         identifier = filename.replace(".txt", "")
-        output_path = Path(f'generated_html/illushisdoc_bb_dir/{identifier}.jpg')
-        
+        output_path = Path(f"generated_html/illushisdoc_bb_dir/{identifier}.jpg")
+
         image = draw_yolo_annotations(
-                images_dir_mss / f'{identifier}.jpg',
-                labels_dir_mss / f'{identifier}.txt',
-                label_map,
-                )
-        
+            images_dir_mss / f"{identifier}.jpg",
+            labels_dir_mss / f"{identifier}.txt",
+            label_map,
+        )
+
         if not output_path.is_file():
             image.save((output_path))
             annotations_crées += 1
         else:
             annotations_ignorées += 1
-        
-        identifier_list.append(f'{identifier}')
-        
+
+        identifier_list.append(f"{identifier}")
+
     print("génération des annotations pour illuhisdoc printed")
 
     for filename in tqdm(random.sample(os.listdir(labels_dir_p), 25)):
         if not filename.endswith(".txt"):
             continue
         identifier = filename.replace(".txt", "")
-        output_path = Path(f'generated_html/illushisdoc_bb_dir/{identifier}.jpg')
-        
+        output_path = Path(f"generated_html/illushisdoc_bb_dir/{identifier}.jpg")
+
         image = draw_yolo_annotations(
-                images_dir_p / f'{identifier}.jpg',
-                labels_dir_p / f'{identifier}.txt',
-                label_map,
-                )
-        
+            images_dir_p / f"{identifier}.jpg",
+            labels_dir_p / f"{identifier}.txt",
+            label_map,
+        )
+
         if not output_path.is_file():
             image.save((output_path))
             annotations_crées += 1
         else:
             annotations_ignorées += 1
-        
-        identifier_list.append(f'{identifier}')
-    
+
+        identifier_list.append(f"{identifier}")
+
     total_value = sum(counts_illu.values())
-    selection = random.sample(identifier_list, 25)    
-    with open(f'{output_dir}/illuhisdoc.html', 'w') as f:
-        f.write(f'''<!DOCTYPE html>
+    selection = random.sample(identifier_list, 25)
+    with open(f"{output_dir}/illuhisdoc.html", "w") as f:
+        f.write(
+            f"""<!DOCTYPE html>
             <html>
                 <head>
                     <meta charset="UTF-8">
@@ -547,10 +575,12 @@ def generating_illuhisdoc_html(directory: Path) -> None:
                     <a href="#top">Back to top</a>
                 </footer>    
             </html>
-            ''')
-        
-    with open(f'{output_dir}/illu_image.html', 'w') as f:
-        f.write('''<!DOCTYPE html>
+            """
+        )
+
+    with open(f"{output_dir}/illu_image.html", "w") as f:
+        f.write(
+            """<!DOCTYPE html>
                 <html>
                     <head>
                         <meta charset="UTF-8">
@@ -561,57 +591,62 @@ def generating_illuhisdoc_html(directory: Path) -> None:
                         <h1 id="top"><a href="index.html">GenHisDoc</a></h1>
                     </header>
                     <body>
-                ''')
+                """
+        )
         for i in selection:
-            f.write(f'<p>image : {i}.jpg</p>\n')
+            f.write(f"<p>image : {i}.jpg</p>\n")
             f.write(f'<img src="illushisdoc_bb_dir/{i}.jpg">\n')
 
-        f.write('''</body>
+        f.write(
+            """</body>
                     <footer>
                         <a href="#top">Back to top</a>
                     </footer>
                 </html>
-                ''')
+                """
+        )
 
         print(f"images annotées crées : {annotations_crées}")
-        print(f"annotations ignorées : {annotations_ignorées}")   
-        
+        print(f"annotations ignorées : {annotations_ignorées}")
+
+
 def generating_horae_html(directory: Path) -> None:
-      
+
     images_dir_horae = Path("HoraeV2/images")
     labels_dir_horae = Path("HoraeV2/labels")
-    
+
     identifier_list = []
     annotations_crées = 0
     annotations_ignorées = 0
-    
+
     print("génération des annotations pour Horae LSv2")
-    
+
     for filename in tqdm(random.sample(os.listdir(labels_dir_horae), 100)):
         if not filename.endswith(".txt"):
             continue
         identifier = filename.replace(".txt", "")
-        output_path = Path(f'generated_html/horae_bb_dir/{identifier}.jpg')
-        
+        output_path = Path(f"generated_html/horae_bb_dir/{identifier}.jpg")
+
         image = draw_yolo_annotations(
-                images_dir_horae / f'{identifier}.jpg',
-                labels_dir_horae / f'{identifier}.txt',
-                label_map,
-                )
-        
+            images_dir_horae / f"{identifier}.jpg",
+            labels_dir_horae / f"{identifier}.txt",
+            label_map,
+        )
+
         if not output_path.is_file():
             image.save((output_path))
             annotations_crées += 1
         else:
             annotations_ignorées += 1
-        
-        identifier_list.append(f'{identifier}')
-    
+
+        identifier_list.append(f"{identifier}")
+
     total_value = sum(counts_horae.values())
     selection = random.sample(identifier_list, 25)
-        
-    with open(f'{output_dir}/horae.html', 'w') as f:
-        f.write(f'''<!DOCTYPE html>
+
+    with open(f"{output_dir}/horae.html", "w") as f:
+        f.write(
+            f"""<!DOCTYPE html>
             <html>
                 <head>
                     <meta charset="UTF-8">
@@ -646,10 +681,12 @@ def generating_horae_html(directory: Path) -> None:
                     <a href="#top">Back to top</a>
                 </footer>    
             </html>
-            ''')
-        
-    with open(f'{output_dir}/horae_image.html', 'w') as f:
-        f.write('''<!DOCTYPE html>
+            """
+        )
+
+    with open(f"{output_dir}/horae_image.html", "w") as f:
+        f.write(
+            """<!DOCTYPE html>
                 <html>
                     <head>
                         <meta charset="UTF-8">
@@ -660,30 +697,34 @@ def generating_horae_html(directory: Path) -> None:
                         <h1 id="top"><a href="index.html">GenHisDoc</a></h1>
                     </header>
                     <body>
-                ''')
+                """
+        )
         for i in selection:
-            f.write(f'<p>image : {i}.jpg</p>\n')
+            f.write(f"<p>image : {i}.jpg</p>\n")
             f.write(f'<img src="horae_bb_dir/{i}.jpg">\n')
 
-        f.write('''</body>
+        f.write(
+            """</body>
                     <footer>
                         <a href="#top">Back to top</a>
                     </footer>
                 </html>
-                ''')
+                """
+        )
 
         print(f"images annotées crées : {annotations_crées}")
         print(f"annotations ignorées : {annotations_ignorées}")
 
+
 def generating_aikon_html(directory: Path) -> None:
     aikon_dir = "Aikon"
-    
+
     identifier_list = []
     annotations_crées = 0
     annotations_ignorées = 0
-    
+
     print("génération des annotations pour Aikon")
-    
+
     all_labels = []
     for subdir in Path(aikon_dir).iterdir():
         if subdir.is_dir():
@@ -691,31 +732,34 @@ def generating_aikon_html(directory: Path) -> None:
             images_dir = subdir / "images"
             if labels_dir.exists() and images_dir.exists():
                 for label_file in labels_dir.glob("*.txt"):
-                    all_labels.append((label_file, images_dir / f"{label_file.stem}.jpg"))
-    
+                    all_labels.append(
+                        (label_file, images_dir / f"{label_file.stem}.jpg")
+                    )
+
     one_hundred_labels = random.sample(all_labels, 100)
-    
+
     for label_path, image_path in tqdm(one_hundred_labels):
         identifier = label_path.stem
-        output_path = Path(f'generated_html/aikon_bb_dir/{identifier}.jpg')
-    
+        output_path = Path(f"generated_html/aikon_bb_dir/{identifier}.jpg")
+
         image = draw_yolo_annotations(
             image_path,
             label_path,
             label_map,
         )
-    
+
         if not output_path.is_file():
             image.save(output_path)
             annotations_crées += 1
         else:
             annotations_ignorées += 1
         identifier_list.append(identifier)
-    
-    selection = random.sample(identifier_list, 100)  
 
-    with open(f'{output_dir}/aikon.html', 'w') as f:
-        f.write(f'''<!DOCTYPE html>
+    selection = random.sample(identifier_list, 100)
+
+    with open(f"{output_dir}/aikon.html", "w") as f:
+        f.write(
+            f"""<!DOCTYPE html>
             <html>
                 <head>
                     <meta charset="UTF-8">
@@ -784,10 +828,12 @@ def generating_aikon_html(directory: Path) -> None:
                     <a href="#top">Back to top</a>
                 </footer>    
             </html>
-            ''')        
+            """
+        )
 
-    with open(f'{output_dir}/aikon_image.html', 'w') as f:
-        f.write('''<!DOCTYPE html>
+    with open(f"{output_dir}/aikon_image.html", "w") as f:
+        f.write(
+            """<!DOCTYPE html>
                 <html>
                     <head>
                         <meta charset="UTF-8">
@@ -798,17 +844,21 @@ def generating_aikon_html(directory: Path) -> None:
                         <h1 id="top"><a href="index.html">GenHisDoc</a></h1>
                     </header>
                     <body>
-                ''')
+                """
+        )
         for i in selection:
-            f.write(f'<p>image : {i}.jpg</p>\n')
+            f.write(f"<p>image : {i}.jpg</p>\n")
             f.write(f'<img src="aikon_bb_dir/{i}.jpg">\n')
 
-        f.write('''</body>
+        f.write(
+            """</body>
                     <footer>
                         <a href="#top">Back to top</a>
                     </footer>
                 </html>
-                ''')
+                """
+        )
+
 
 generating_index_html(output_dir)
 generating_style_css(output_dir)
@@ -816,4 +866,3 @@ generating_sved_html(output_dir)
 generating_illuhisdoc_html(output_dir)
 generating_horae_html(output_dir)
 generating_aikon_html(output_dir)
-    

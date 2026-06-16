@@ -3,15 +3,18 @@ import shutil
 from pathlib import Path
 import pandas as pd
 
+# Scripte qui transforme tous les dossiers d'images et d'annotations en un dataset unifié de 1.jpg/1.txt à n.jpg/n.txt.
+# Produit également un csv qui permet de retrouver le dataset d'origine d'une image.
+
 datasets = [
-    {"key": "aikon_dir", "path": Path("Aikon"),      "mode": "subdirs"},
-    {"key": "horae_dir", "path": Path("HoraeV2"),    "mode": "flat"},
-    {"key": "illu_dir",  "path": Path("illuhisdoc"), "mode": "flat"},
-    {"key": "sved_dir",  "path": Path("S-VED"),      "mode": "flat"},
+    {"key": "aikon_dir", "path": Path("Aikon"), "mode": "subdirs"},
+    {"key": "horae_dir", "path": Path("HoraeV2"), "mode": "flat"},
+    {"key": "illu_dir", "path": Path("illuhisdoc"), "mode": "flat"},
+    {"key": "sved_dir", "path": Path("S-VED"), "mode": "flat"},
 ]
 
-output_dir        = Path("../GenHisDoc")
-IMG_EXT           = {".jpg"}
+output_dir = Path("../GenHisDoc")
+IMG_EXT = {".jpg"}
 output_images_dir = output_dir / "images"
 output_labels_dir = output_dir / "labels"
 
@@ -24,13 +27,13 @@ print(f"  └── labels/")
 
 stats = {"copied": 0, "missing_label": 0, "skipped_dir": 0}
 
-df = pd.DataFrame(columns=['Images origine', 'Images renommées'])
+df = pd.DataFrame(columns=["Images origine", "Images renommées"])
 
 
 def process_pair(img_path: Path, label_dir: Path, index: int, df: pd.DataFrame):
     """Copie une image et son annotation en les renommant avec `index`."""
     label_path = label_dir / (img_path.stem + ".txt")
-    dest_img   = output_images_dir / f"{index}{img_path.suffix.lower()}"
+    dest_img = output_images_dir / f"{index}{img_path.suffix.lower()}"
     dest_label = output_labels_dir / f"{index}.txt"
 
     shutil.copy2(img_path, dest_img)
@@ -42,18 +45,17 @@ def process_pair(img_path: Path, label_dir: Path, index: int, df: pd.DataFrame):
         stats["missing_label"] += 1
         print(f"  [WARN] Annotation manquante : {img_path.name}")
 
-    new_row = pd.DataFrame([{
-        'Images origine':   str(img_path),
-        'Images renommées': str(dest_img)
-    }])
+    new_row = pd.DataFrame(
+        [{"Images origine": str(img_path), "Images renommées": str(dest_img)}]
+    )
     df = pd.concat([df, new_row], ignore_index=True)
 
-    return index + 1, df  # ✅ retourne les deux
+    return index + 1, df
 
 
 def collect_flat(dataset_path: Path, index: int, df: pd.DataFrame):
     """Traite un dataset à structure plate (images/ et labels/ à la racine)."""
-    img_dir   = dataset_path / "images"
+    img_dir = dataset_path / "images"
     label_dir = dataset_path / "labels"
 
     if not img_dir.exists():
@@ -65,7 +67,9 @@ def collect_flat(dataset_path: Path, index: int, df: pd.DataFrame):
     print(f"  Structure plate → {len(images)} image(s)")
 
     for img_path in images:
-        index, df = process_pair(img_path, label_dir, index, df)  # ✅ df passé et récupéré
+        index, df = process_pair(
+            img_path, label_dir, index, df
+        )  # ✅ df passé et récupéré
 
     return index, df
 
@@ -73,13 +77,12 @@ def collect_flat(dataset_path: Path, index: int, df: pd.DataFrame):
 def collect_subdirs(dataset_path: Path, index: int, df: pd.DataFrame):
     """Parcourt chaque sous-dossier qui contient images/ et labels/."""
     subdirs = sorted(
-        p for p in dataset_path.iterdir()
-        if p.is_dir() and not p.name.startswith(".")
+        p for p in dataset_path.iterdir() if p.is_dir() and not p.name.startswith(".")
     )
     print(f"  Structure sous-dossiers → {len(subdirs)} sous-dossier(s)")
 
     for subdir in subdirs:
-        img_dir   = subdir / "images"
+        img_dir = subdir / "images"
         label_dir = subdir / "labels"
 
         if not img_dir.exists():
@@ -91,7 +94,7 @@ def collect_subdirs(dataset_path: Path, index: int, df: pd.DataFrame):
         print(f"    {subdir.name} : {len(images)} image(s)")
 
         for img_path in images:
-            index, df = process_pair(img_path, label_dir, index, df)  # ✅ corrigé
+            index, df = process_pair(img_path, label_dir, index, df)
 
     return index, df
 
@@ -99,9 +102,9 @@ def collect_subdirs(dataset_path: Path, index: int, df: pd.DataFrame):
 index = 1
 
 for ds in datasets:
-    key          = ds["key"]
+    key = ds["key"]
     dataset_path = ds["path"]
-    mode         = ds["mode"]
+    mode = ds["mode"]
 
     print(f"\n{'─' * 52}")
     print(f"[{key}]  {dataset_path}  (mode: {mode})")
@@ -112,9 +115,9 @@ for ds in datasets:
         continue
 
     if mode == "flat":
-        index, df = collect_flat(dataset_path, index, df)      # ✅ tuple dépaqueté
+        index, df = collect_flat(dataset_path, index, df)
     elif mode == "subdirs":
-        index, df = collect_subdirs(dataset_path, index, df)   # ✅ tuple dépaqueté
+        index, df = collect_subdirs(dataset_path, index, df)
     else:
         print(f"  [ERREUR] Mode inconnu : {mode}")
 

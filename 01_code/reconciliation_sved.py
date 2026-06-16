@@ -10,6 +10,8 @@ import argparse
 import matplotlib.gridspec as gridspec
 from scipy.stats import gaussian_kde
 
+# Transforme le dataset S-VED into a yolo based dataset. 
+
 DATASET_DIR = Path("S-VED/")
 
 df = pd.read_csv(DATASET_DIR / "SVED.csv")

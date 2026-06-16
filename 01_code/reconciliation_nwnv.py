@@ -3,6 +3,9 @@ import os
 from pathlib import Path
 from Lujes.yolo import draw_yolo_annotations
 
+# Transforme le dataset newspaper navigator into a yolo based dataset. 
+
+
 path = Path('newspaper navigator')
 i_index = []
 
