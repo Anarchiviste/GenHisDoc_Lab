@@ -46,7 +46,7 @@ def draw_yolo_annotations(image_path: Path, label_path: Path, label_map: dict) -
 
 def numeral_renamer(directory_path: Path) -> None:
     "Rename file 1 to n"
-    id = 0
+    id = 8310
     for f in sorted(os.listdir(directory_path)):
         id += 1
         # skip directories

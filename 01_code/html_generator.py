@@ -28,6 +28,7 @@ dirlist = [
     "horae_bb_dir",
     "illushisdoc_bb_dir",
     "aikon_bb_dir",
+    "newspaper_bb_dir",
 ]
 
 if Path(output_dir).is_dir():
@@ -59,6 +60,7 @@ illuhisdoc_dir = Path("illuhisdoc/labels")
 horae_dir = Path("HoraeV2/labels")
 sved_dir = Path("S-VED/labels")
 aikon_dir = Path("Aikon")
+newspaper_dir = Path("newspaper-navigator/yolo_dataset/labels")
 
 
 def illuhisdoc_visualisation(input_dir: Path, labels_dict: dict) -> None:
@@ -212,10 +214,46 @@ def aikon_visualisation(input_dir: Path, labels_dict: dict) -> None:
     plt.savefig("generated_html/illustrations/aikon_class_distribution.png")
 
 
+def newspaper_visualisation(input_dir: Path, labels_dict: dict) -> None:
+    total_files = 0
+    total_labels = []
+    for filename in os.listdir(input_dir):
+        if not filename.endswith(".txt"):
+            continue
+
+        total_files = total_files + 1
+        input_path = os.path.join(input_dir, filename)
+
+        with open(input_path, "r") as f:
+            lines = f.readlines()
+
+        for line in lines:
+            parts = line.strip().split()
+            if not parts:
+                continue
+
+            label = int(parts[0])
+
+            total_labels.append(label)
+
+    global counts_newspaper
+    counts_newspaper = Counter(total_labels)
+    print(counts_newspaper)
+
+    labels_newspaper = [labels_dict[k] for k in counts_newspaper.keys()]
+    values_newspaper = list(counts_newspaper.values())
+
+    plt.figure(figsize=(6, 6))
+    plt.pie(values_newspaper, labels=labels_newspaper, autopct="%1.1f%%")
+    plt.title("newspapers navigator classes distribution")
+    plt.savefig("generated_html/illustrations/newspaper_class_distribution.png")
+
+
 illuhisdoc_visualisation(illuhisdoc_dir, label_map)
 horae_visualisation(horae_dir, label_map)
 sved_visualisation(sved_dir, label_map)
 aikon_visualisation(aikon_dir, label_map)
+newspaper_visualisation(newspaper_dir, label_map)
 
 # GENERATING HTML
 
@@ -311,6 +349,7 @@ def generating_index_html(directory: Path) -> None:
                         <article><a href="horae.html">Horae LSv2</a></article>
                         <article><a href="sved.html">S-VED</a></article>
                         <article><a href="aikon.html">Aikon</a></article
+                        <article><a href="newspaper.html">Newspaper Navigator</a></article>
                     </main>
                     <img src="illustrations/total_class_distribution.png">
                 </body>
@@ -860,9 +899,113 @@ def generating_aikon_html(directory: Path) -> None:
         )
 
 
+def generating_newspaper_html(directory: Path) -> None:
+    images_dir_newspaper = Path("newspaper-navigator/yolo_dataset/images")
+    labels_dir_newspaper = Path("newspaper-navigator/yolo_dataset/labels")
+
+    identifier_list = []
+    annotations_crées = 0
+    annotations_ignorées = 0
+
+    print("génération des annotations pour NewsPaper Navigator")
+
+    for filename in tqdm(random.sample(os.listdir(labels_dir_newspaper), 100)):
+        if not filename.endswith(".txt"):
+            continue
+        identifier = filename.replace(".txt", "")
+        output_path = Path(f"generated_html/newspaper_bb_dir/{identifier}.jpg")
+
+        image = draw_yolo_annotations(
+            images_dir_newspaper / f"{identifier}.jpg",
+            labels_dir_newspaper / f"{identifier}.txt",
+            label_map,
+        )
+
+        if not output_path.is_file():
+            image.save((output_path))
+            annotations_crées += 1
+        else:
+            annotations_ignorées += 1
+
+        identifier_list.append(f"{identifier}")
+
+    total_value = sum(counts_newspaper.values())
+    selection = random.sample(identifier_list, 25)
+
+    with open(f"{output_dir}/newspaper.html", "w") as f:
+        f.write(
+            f"""<!DOCTYPE html>
+            <html>
+                <head>
+                    <meta charset="UTF-8">
+                    <link type="text/css" rel="stylesheet" href="style.css">
+                    <script src="visualisation.js" defer></script>
+                </head>
+                <body>
+                <header>
+                    <h1 id="top"><a href="index.html">GenHisDoc</a></h1>
+                    <h2>Horae LSv2</h2>
+                    <p><a href="newspaper_image.html">visualisation des images</a></p>
+                </header>
+                <main>
+                <p>Paper : <a href="https://github.com/LibraryOfCongress/newspaper-navigator/blob/master/whitepapers/Newspaper_Navigator_Dataset_Paper.pdf">The Newspaper Navigator Dataset: Extracting And Analyzing Visual Content form 16 million Historic Newspaper Pages in Chronicling America</a></p>
+                    <p>Published by  By Benjamin Charles Germain Lee (2020 Library of Congress Innovator in Residence) </p>
+                
+                    <p>Modifications : Conversion from coco to yolo, conversion from the Newspaper paper navigator classes to our own, selection of 1000 images, enrichement and reannotation</p>
+
+                    <img src="illustrations/newspaper_class_distribution.png">
+                        <li>Total : {total_value}</li>
+                        <hr>
+                        <li>Initials: {counts_newspaper[2]}</li>
+                        <li>Ornaments: {counts_newspaper[1]}</li>
+                        <li>Illustrations : {counts_newspaper[0]}</li>
+                    </ul>
+                </main>
+                </body>
+                <footer>
+                    <a href="#top">Back to top</a>
+                </footer>    
+            </html>
+            """
+        )
+
+    with open(f"{output_dir}/newspaper_image.html", "w") as f:
+        f.write(
+            """<!DOCTYPE html>
+                <html>
+                    <head>
+                        <meta charset="UTF-8">
+                        <link type="text/css" rel="stylesheet" href="style.css">
+                        <script src="visualisation.js" defer></script>
+                    </head>
+                    <header>
+                        <h1 id="top"><a href="index.html">GenHisDoc</a></h1>
+                    </header>
+                    <body>
+                    
+                """
+        )
+        for i in selection:
+            f.write(f"<p>image : {i}.jpg</p>\n")
+            f.write(f'<img src="newspaper_bb_dir/{i}.jpg">\n')
+
+        f.write(
+            """</body>
+                    <footer>
+                        <a href="#top">Back to top</a>
+                    </footer>
+                </html>
+                """
+        )
+
+        print(f"images annotées crées : {annotations_crées}")
+        print(f"annotations ignorées : {annotations_ignorées}")
+
+
 generating_index_html(output_dir)
-generating_style_css(output_dir)
-generating_sved_html(output_dir)
-generating_illuhisdoc_html(output_dir)
-generating_horae_html(output_dir)
-generating_aikon_html(output_dir)
+#generating_style_css(output_dir)
+#generating_sved_html(output_dir)
+#generating_illuhisdoc_html(output_dir)
+#generating_horae_html(output_dir)
+#generating_aikon_html(output_dir)
+generating_newspaper_html(output_dir)

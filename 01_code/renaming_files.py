@@ -1,7 +1,6 @@
 import os
+import sys
 from utilitaires.yolo import numeral_renamer
 
-# Renomme des images.
-
-path = "Lujes/tables/ tables statistiques des divers pays de l'Univers pour l'année 1877"
+path = sys.argv[1]
 numeral_renamer(path)
