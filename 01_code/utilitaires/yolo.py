@@ -44,9 +44,8 @@ def draw_yolo_annotations(image_path: Path, label_path: Path, label_map: dict) -
            annotator.box_label([x1, y1, x2, y2], label=label, color=colors(cls_id, True))
    return Image.fromarray(annotator.result())
 
-def numeral_renamer(directory_path: Path) -> None:
+def numeral_renamer(directory_path: Path, id:int) -> None:
     "Rename file 1 to n"
-    id = 8310
     for f in sorted(os.listdir(directory_path)):
         id += 1
         # skip directories
