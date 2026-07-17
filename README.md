@@ -99,4 +99,14 @@ Witness #2387 : Latin 13955 | Paris, BnF - annotated by Alexandre
 
 Witness #2423 : Dc 183 | Dresden, Sächsische Landesbibliothek - annotated by Alexandre 
 
+#### Projet EIDA
 
+The project ANR EIDAaims at developing a new critique of astronomical diagrams of the 8th-18th centuries found in Chinese, Sanskrit, Persian/Arabic, Greek, Hebrew and Latin sources.  It is an interdisciplinary project joining a team of historians of sciences with computer vision researchers who will develop specific algorithms for retrieval and analysis of the historical diagrams. 
+
+Witness #409 : Latin 7293A | Bibliothèque nationale de France (http://archivesetmanuscrits.bnf.fr/ark:/12148/cc66491c)
+
+Witness #407 : Sprenger 1838 | Staatsbibliothek (https://dlc.mpg.de/!image/1762597527/10/-/)
+
+Witness #362 : Sanscrit 964 | Bibliothèque nationale de France (https://gallica.bnf.fr/ark:/12148/btv1b53119236k/f1)
+
+Witness #360 : Supplément turc 242 | Bibliothèque nationale de France (https://gallica.bnf.fr/ark:/12148/btv1b8427189w)
