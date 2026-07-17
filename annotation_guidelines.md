@@ -1,29 +1,26 @@
 ---
-title : Guidelines for Historical Corpora Annotations for Computer Vision.
-date : 26/06/2026S
+title : Guidelines for Historical Corpora Annotations for Computer Vision Detection.
+date : 26/06/2026
 author : Jules Musquin
 --- 
 
 # Introduction 
 
-This document describe guidelines to annotate an historical corpora for detection and images retrival tasks. Made with the primary goal to work on manuscripts(codex) and printed books, this guidelines where also used to annotate press, photography and scrolls.
+This document describes guidelines for annotating historical corpora for image detection and retrieval tasks. Designed primarily for manuscripts (codices) and printed books, they also apply to various types of documents such as newspaper articles, photographs, or scrolls.
 
-The page of an historical document are composed between, text, illustrations, ornaments and other elements that in most cases follow mostly two rules. 
-- For printed books, there are technicals rules - called standards - that are the way an industry as adapted to uniformize the production of an element. These rules were also the child of a tradition of artisanal book crafting.
+The page of a historical document is composed of text, illustrations, ornamentation, and other elements that, in most cases, adhere to two types of rules. For printed books, there are technical rules—called standards—that correspond to the industry's established production standards. These rules stem from the artisanal tradition (initials, typefaces) of bookmaking before the invention of printing. This tradition corresponded to the social norms that defined the standards of artisanal production and their adaptation over time.
 
-- This tradition are socials rules that are the way an artisanal production adapted in the long term
+Our goal is to extract visual elements without regard to the text or the document's meaning. These guidelines aim to obtain relevant annotations for training and testing machine learning algorithms. They focus on annotating typical visual elements at the page level, without considering text. We do not perform finer-grained classification, such as creating semantic links between illustrations.
 
 # Definition
 
-This dataset use 5 classes to describe elements inside historicals documents : 
+You will be annotating the corpus of documents with 5 classes to describe elements inside historicals documents : 
 
 - 0: "Illustration"
 - 1: "Ornament"
 - 2: "Initial"
 - 3: "Stamp"
 - 4: "Table"
-
-# A short introduction in the element of text morphology. 
 
 ## Illustration
 

@@ -1,46 +1,25 @@
-# GenHisDoc 
+
+# GenHisDoc - Generalistic Historical Document Dataset - 9448 images
+
+(CLEANED UP DATASET IS ON HUGGIN FACE)[https://huggingface.co/datasets/Anarchiviste/GenHisDoc_dataset/tree/main]
 
 GenHisDoc is a generalistic datasets for historical documents layout recognition and detection. GenHisDoc use a combination of several previously published datasets which have been adapted and re-annotated to work together and our own annotated data.
 
+
+> [!IMPORTANT]
+> This is the work-in-progress version of a dataset published on Huggin Face. Here you have access to the source code that created the final dataset. This work is not intended for training or evaluation. Some datasets, such as newspaper navigator, have been removed from the final version, and some annotations have been revised.
+> DO NOT USE THIS  REPOSITORY AS A DATASET.
+
 ```markdown
 GenHisDoc
-├── code 
+├── 01_code
+│   ├── notebook
+│   └── utilitaires
 ├── S-VED
 ├── illuhisdoc
 ├── Horae LS_V2
-└── Custom (Lujes) 
-```
-## Project schedule and organisation
-
-```mermaid
-gantt
-    title GenHisDoc Schedule & organisation
-    dateformat yyyy-mm-dd
-    excludes 2026-04-01,2026-07-01
-
-    section Bibliography
-        Datasets review   :a1, 2026-04-01, 13d
-        Ontology review & creation    :after a1, 9d
-
-    section Datasets Creation
-        harmonization of formats :b1, 2026-04-27, 9d
-        harmonization of annotations :b2, after b1, 15d
-        enrichment of annotations :after b2,
-```
-
-## Pipeline
-
-```mermaid
-graph LR
-    A[Published datasets]  
-    subgraph Traitement
-    B[Yolo format conversion] --> C[Annotations harmonization]
-    end
-    D[Enrichement]
-
-    A --> B
-    C --> D
-
+├── El pipic stamp yolo
+└── Aikon 
 ```
 
 ## Published Datasets inside GenHisDoc
@@ -116,6 +95,7 @@ Witness #2387 : Latin 13955 | Paris, BnF - annotated by Alexandre
 
 Witness #2423 : Dc 183 | Dresden, Sächsische Landesbibliothek - annotated by Alexandre 
 
-### My own annotated documents
+## Architecture of the project
 
+[The architecture of the project](img/projectarchitecture.jpg)
 
