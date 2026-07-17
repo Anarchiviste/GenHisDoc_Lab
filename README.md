@@ -1,7 +1,7 @@
 
 # GenHisDoc - Generalistic Historical Document Dataset - 9448 images
 
-(CLEANED UP DATASET IS ON HUGGIN FACE)[https://huggingface.co/datasets/Anarchiviste/GenHisDoc_dataset/tree/main]
+[CLEANED UP DATASET IS ON HUGGIN FACE](https://huggingface.co/datasets/Anarchiviste/GenHisDoc_dataset/tree/main)
 
 GenHisDoc is a generalistic datasets for historical documents layout recognition and detection. GenHisDoc use a combination of several previously published datasets which have been adapted and re-annotated to work together and our own annotated data.
 
