@@ -10,6 +10,10 @@ GenHisDoc is a generalistic datasets for historical documents layout recognition
 > This is the work-in-progress version of a dataset published on Huggin Face. Here you have access to the source code that created the final dataset. This work is not intended for training or evaluation. Some datasets, such as newspaper navigator, have been removed from the final version, and some annotations have been revised.
 > DO NOT USE THIS  REPOSITORY AS A DATASET.
 
+## Architecture of the project
+
+[The architecture of the project](img/projectarchitecture.jpg)
+
 ```markdown
 GenHisDoc
 ├── 01_code
@@ -95,7 +99,4 @@ Witness #2387 : Latin 13955 | Paris, BnF - annotated by Alexandre
 
 Witness #2423 : Dc 183 | Dresden, Sächsische Landesbibliothek - annotated by Alexandre 
 
-## Architecture of the project
-
-[The architecture of the project](img/projectarchitecture.jpg)
 
